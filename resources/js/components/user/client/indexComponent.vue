@@ -104,12 +104,24 @@
                 modalClientId: '',
                 hasError: false,
                 hasSuccess: false,
+                searchKeyword: ''
 			}
 		},
 		created: function() {
 			// 必要に応じて、初期表示時に使用するLaravelのAPIを呼び出すメソッドを定義
             this.loadClients();
 		},
+        mounted: function () {
+            // this.workStart = dayjs(this.work.period_start_date).month(5).format();
+			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keyup', (e) => {
+				if (e.key === 'Enter' || e.keyCode === 13) {
+					this.searchKeyword = '';
+					if(!e.target.value) return;
+					this.searchKeyword = e.target.value;
+					this.loadClients_s();
+				}
+			});
+        },
 		computed: {},
 		methods: {
             // お客様一覧を取得するAPI
@@ -117,6 +129,19 @@
                 axios.get('/api/clients')
                     .then(result => {
                         this.clients = result.data.data
+                    })
+                    .catch(error => {
+                        console.log('err', error);
+                    })
+            },
+            // お客様一覧を取得するAPI-new
+            loadClients_s: function() {
+                axios.post('/api/clients/search',{
+                    keyword: this.searchKeyword,
+                })
+                    .then(result => {
+                        console.log(result);
+                        this.clients = result.data.data;
                     })
                     .catch(error => {
                         console.log('err', error);

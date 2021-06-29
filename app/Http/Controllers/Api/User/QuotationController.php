@@ -89,7 +89,12 @@ class QuotationController extends ApiBaseController
 
     public function search(Request $request)
     {
-        return (new QuotationCollection(Quotation::search($request->all())->paginate()))->response();
+        // return (new QuotationCollection(Quotation::search($request->all())->paginate()))->response();
+        return (new QuotationCollection(Quotation::search($request->all())->where('name', 'like', "%$request->keyword%")
+            ->orWhere('number', 'like', "%$request->keyword%")
+            ->orWhere('memo', 'like', "%$request->keyword%")
+            ->orderBy('created_at', 'DESC')
+            ->paginate()))->response();
     }
 
     /**

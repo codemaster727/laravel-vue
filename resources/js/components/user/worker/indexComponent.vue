@@ -112,6 +112,17 @@
             this.loadMembers();
             this.loadWorkers();
         },
+        mounted: function () {
+            // this.workStart = dayjs(this.work.period_start_date).month(5).format();
+			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keyup', (e) => {
+				if (e.key === 'Enter' || e.keyCode === 13) {
+					this.searchKeyword = '';
+					if(!e.target.value) return;
+					this.searchKeyword = e.target.value;
+					this.loadWorkers_s();
+				}
+			});
+        },
         computed: {},
         methods: {
             // 担当者を取得するAPI
@@ -147,6 +158,19 @@
                     .then(result => {
                         console.log(result);
                         this.workers = result.data
+                    })
+                    .catch(error => {
+                        console.log('err', error);
+                    })
+            },
+            // 職人一覧を取得するAPI-new
+            loadWorkers_s: function() {
+                axios.post('/api/user/workers/searchNew',{
+                    keyword: this.searchKeyword,
+                })
+                    .then(result => {
+                        console.log(result);
+                        this.workers = result.data.data
                     })
                     .catch(error => {
                         console.log('err', error);

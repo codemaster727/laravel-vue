@@ -5,6 +5,7 @@
 				<div class="c-search--box left">
 					<input class="c-input--gray" type="" name="" placeholder="テキストを入力してください。" v-model="searchKeyword">
 				</div>
+				asdasd
 			</div>
 		</div>
 		<div class="l-wrap--header">
@@ -105,7 +106,7 @@
 	export default {
 		data() {
 			return {
-				isSearchActive: false, // 検索のモーダル
+				isSearchActive: true, // 検索のモーダル
                 searchKeyword: '', // 検索キーワード
                 panelActive: '1', // タブ切り替え
                 member_id: '0', // 検索メンバー
@@ -115,19 +116,30 @@
                 workStart: '', // 現場開始時間
 			}
         },
+		props: ["mykeyword"],
 		created: function() {
             this.loadMembers();
             this.loadWorks();
         },
         mounted: function () {
             // this.workStart = dayjs(this.work.period_start_date).month(5).format();
+			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keyup', (e) => {
+				if (e.key === 'Enter' || e.keyCode === 13) {
+					this.searchKeyword = '';
+					if(!e.target.value) return;
+					this.searchKeyword = e.target.value;
+					this.loadWorks();
+				}
+			});
         },
         filters: {
             moment(value, format) {
                 return moment(value).format(format);
             }
         },
-		computed: {},
+		computed: {
+
+		},
 		methods: {
             // 担当者リストのローディング
             loadMembers: function() {
@@ -149,8 +161,8 @@
                     member_id: this.member_id,
                 }).then(
                     (response) => {
+                        console.log(response.data);
                         this.works = response.data.data;
-                        // console.log(this.works);
                     }
                 );
             },
@@ -174,7 +186,13 @@
 		watch: {
             searchKeyword: function() {
                 this.loadWorks();
-            }
+            },
+			mydata: function() {
+                this.works = []
+            },
+			window: function() {
+                alert()
+            },
         },
 	}
 </script>

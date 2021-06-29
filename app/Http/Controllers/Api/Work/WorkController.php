@@ -186,6 +186,14 @@ class WorkController extends ApiBaseController
      */
     public function search(Request $request)
     {
-        return (new WorkResourceCollection(Work::search($request->all())->paginate()))->response();
+        // var_dump($request->all());exit;
+        
+        return (new WorkResourceCollection(Work::search($request->all())
+            ->where('name', 'like', "%$request->keyword%")
+            ->orWhere('address', 'like', "%$request->keyword%")
+            ->orWhere('remark', 'like', "%$request->keyword%")
+            ->orWhere('memo', 'like', "%$request->keyword%")
+            ->orderBy('created_at', 'DESC')
+            ->paginate()))->response();
     }
 }

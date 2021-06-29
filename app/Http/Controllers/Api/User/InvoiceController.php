@@ -87,7 +87,13 @@ class InvoiceController extends ApiBaseController
 
     public function search(Request $request)
     {
-        return (new InvoiceCollection(Invoice::search($request->all())->paginate()))->response();
+        // return (new InvoiceCollection(Invoice::search($request->all())->paginate()))->response();
+        return (new InvoiceCollection(Invoice::search($request->all())->where('name', 'like', "%$request->keyword%")
+            ->orWhere('invoice_number', 'like', "%$request->keyword%")
+            ->orWhere('remark', 'like', "%$request->keyword%")
+            ->orWhere('memo', 'like', "%$request->keyword%")
+            ->orderBy('created_at', 'DESC')
+            ->paginate()))->response();
     }
 
     /**

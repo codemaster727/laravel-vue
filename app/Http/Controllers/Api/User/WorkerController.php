@@ -158,6 +158,27 @@ class WorkerController extends ApiBaseController
 
     /**
      *
+     * 職人を検索するnew
+     * @post ("/api/user/workers/searchNew")
+     *
+     * @param Worker $worker
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     *
+     */
+    public function searchNew(Request $request)
+    {
+        // $worker = Worker::where('worker_code', $id)->first();
+        return (new WorkerCollection(Worker::where('name', 'like', "%$request->keyword%")
+            ->orWhere('email', 'like', "%$request->keyword%")
+            ->orWhere('manager_remark', 'like', "%$request->keyword%")
+            ->orderBy('created_at', 'DESC')
+            ->paginate()))->response();
+        // return $id;
+        // return $worker;
+    }
+    /**
+     *
      * パスワード変更
      * @post ("/api/user/workers/{id}/changePassword")
      *     @Parameter("password", type="string", required="true", description="新規パスワード"),
