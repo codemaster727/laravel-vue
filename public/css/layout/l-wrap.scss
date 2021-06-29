@@ -1,0 +1,1297 @@
+.l-wrap--login,
+.l-wrap--form,
+.l-wrap--table {
+    width: 100%;
+    @include mq_up(md) {
+        margin: auto;
+    }
+}
+.l-wrap--form {
+    @include mq_up(md) {
+        width: 500px;
+        min-width: 500px;
+        padding-top: 48px;
+    }
+}
+.l-wrap--table {
+    @include mq_up(md) {
+        width: 960px;
+        min-width: 960px;
+        padding-top: 48px;
+    }
+    .l-wrap--inner {
+        @include mq_up(md) {
+            border: 1px solid #E5E5E5;
+            padding: 30px 28px;
+            background: #fff;
+        }
+    }
+}
+
+.l-wrap--login {
+    @include mq_up(md) {
+        width: 375px;
+        min-width: 375px;
+        padding-top: 78px;
+    }
+}
+
+
+
+/* ----------------------------------------------------------------------
+
+    ヘッダー
+
+---------------------------------------------------------------------- */
+.l-wrap--header {
+    @include mq_down(md) {
+        background: #fff;
+        padding: 20px 0;
+    }
+    @include mq_up(md) {
+        margin-bottom: 32px;
+    }
+}
+.l-wrap--header__inner {
+    position: relative;
+    text-align: center;
+}
+.l-wrap--header__back {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    img {
+        width: 10px;
+    }
+}
+.l-wrap--header__title {
+    font-size: 16px;
+    font-weight: 700;
+
+    @include mq_down(md) {
+        width: 100%;
+    }
+    @include mq_up(md) {
+        font-size: 20px;
+    }
+}
+
+/* wrapタイプがtable */
+.l-wrap--table,
+.l-wrap--form {
+    .l-wrap--header__inner {
+        @include mq_up(md) {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-align-items: center;
+            -ms-align-items: center;
+            align-items: center;
+        }
+    }
+    .l-wrap--header__inner__sub {
+        @include mq_down(md) {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    .l-wrap--header__inner__list {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        li {
+            @include mq_up(md) {
+                border: 1px solid #CECECE;
+                border-radius: 3px;
+                margin-left: 5px;
+            }
+            a {
+                @include mq_up(md) {
+                    display: block;
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: #70768D;
+                    height: 34px;
+                    padding: 0 15px;
+                    line-height: 34px;
+                }
+            }
+            &.icon a {
+                @include mq_up(md) {
+                    padding: 0 5px;
+                }
+                img {
+                    width: 24px;
+                    vertical-align: middle;
+                    @include mq_down(md) {
+                        height: 24px;
+                    }
+                    @include mq_up(md) {
+                        width: 30px;
+                    }
+                }
+                span {
+                    @include mq_down(md) {
+                        display: block;
+                        font-size: 10px;
+                        font-weight: 700;
+                        margin-top: 4px;
+                    }
+                }
+            }
+            &:not(:first-child) {
+                @include mq_down(md) {
+                    margin-left: 15px;
+                }
+            }
+            &.select-charge {
+                border: none;
+                width: 220px;
+                select {
+                    font-weight: 700;
+                    border-radius: 3px;
+                    width: 100%;
+                    padding: 10px 16px;
+                    border: 1px solid #DEDEDE;
+                }
+            }
+            &.add-list {
+                border: none;
+                border-radius: 30px;
+                a {
+                    color: #EAA524;
+                    font-weight: 400;
+                    padding: 10px 30px 10px 20px;
+                    line-height: normal;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+/* ----------------------------------------------------------------------
+
+    ログインまわり
+
+---------------------------------------------------------------------- */
+.l-wrap--login .l-wrap--header {
+    background: transparent;
+}
+.l-wrap--login__area {
+    background: #fff;
+    border-radius: 3px;
+    padding: 40px 0;
+}
+.l-wrap--login__box {
+    padding: 0 40px;
+    margin-bottom: 21px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    > label {
+        font-size: 13px;
+        margin-bottom: 3px;
+        width: 100%;
+        display: block;
+        font-weight: 700;
+    }
+    input[type=text],
+    input[type=email],
+    input[type=password] {
+        background: #F4F4F4;
+        width: 100%;
+        padding: 12px 10px;
+    }
+    a {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: .9em
+    }
+}
+
+/* ----------------------------------------------------------------------
+
+    トータル金額
+
+---------------------------------------------------------------------- */
+.l-wrap--total {
+    margin-top: 14px;
+    text-align: right;
+    p {
+        font-weight: 700;
+        font-size: 0.9em;
+        color: #7E7E7E;
+        @include mq_up(md) {
+            display: inline-block;
+            padding: 15px 20px;
+            background: #f4f4f4;
+            border-radius: 3px;
+        }
+    }
+}
+
+
+
+
+/* ----------------------------------------------------------------------
+
+    追加
+
+---------------------------------------------------------------------- */
+
+.l-wrap--add__inner {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    /* 横幅いっぱい */
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    /* 横並び */
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+}
+.l-wrap--add__box {
+    @include mq_down(md) {
+        margin-top: 14px;
+    }
+    input {
+        padding: 15px 10px;
+        width: 100%;
+    }
+    input[type=text] {
+        background: #fff;
+    }
+    input[type=submit] {
+        background: #424758;
+    }
+}
+.l-wrap--add__inner {
+    @include mq_down(md) {
+        padding: 0 10px;
+    }
+}
+.l-wrap--add__input {
+    flex: 1;
+}
+.l-wrap--add__submit {
+    width: 50px;
+    color: #fff;
+}
+
+/* ----------------------------------------------------------------------
+
+    タブ
+
+---------------------------------------------------------------------- */
+.l-wrap--tab {
+    @include mq_up(md) {
+        border-bottom: 1px solid #F0F0F0;
+    }
+    @include mq_down(md) {
+        background: #fff;
+        border-top: 1px solid #F0F0F0;
+    }
+}
+.l-wrap--tab__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    li {
+        width: 120px;
+        a {
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding: 15px 0;
+            color: #858C90;
+        }
+        &.selected a {
+            font-weight: 700;
+            color: #000;
+            border-bottom: 2px solid #EAA524;
+        }
+    }
+    &.tab-two {
+        li {
+            @include mq_down(md) {
+                width: 50%;
+            }
+        }
+
+    }
+    &.tab-three {
+        li {
+            @include mq_down(md) {
+                width: 33.3333%;
+            }
+        }
+    }
+    &.tab-four {
+        li {
+            @include mq_down(md) {
+                width: 25%;
+            }
+        }
+    }
+}
+
+
+
+/* ----------------------------------------------------------------------
+
+    リンクボタン
+
+---------------------------------------------------------------------- */
+.l-wrap--button {
+    @include mq_down(md) {
+        margin-top: 14px;
+    }
+}
+.l-wrap--button__title {
+    @include mq_down(md) {
+        font-size: 0.9em;
+        font-weight: 700;
+        padding: 0 10px;
+        margin-bottom: 5px;
+    }
+}
+
+.l-wrap--button__list {
+    width: 100%;
+    padding: 0 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    @include mq_up(md) {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    li {
+        width: 150px;
+        @include mq_up(md) {
+            margin-right: 10px;
+        }
+        a {
+            border-radius: 3px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background: #EAA524;
+            color: #fff;
+        }
+    }
+    &.button-one {
+        li {
+            @include mq_down(md) {
+                margin: auto;
+                width: 49.5%;
+            }
+        }
+    }
+    &.button-two {
+        li {
+            @include mq_down(md) {
+                width: 49.5%;
+            }
+        }
+    }
+    &.button-three {
+        li {
+            @include mq_down(md) {
+                width: 32%;
+            }
+        }
+    }
+    &.button-four {
+        li {
+            @include mq_down(md) {
+                width: 24%;
+            }
+        }
+    }
+    &.select-tab {
+        a {
+            background: #fff;
+            color: #EAA524;
+            border: 1px solid #EAA524;
+        }
+        .selected {
+            a {
+                background: #EAA524;
+                color: #fff;
+            }
+        }
+    }
+}
+/* ----------------------------------------------------------------------
+
+    カレンダースクロール機能（スマホのみ）
+
+---------------------------------------------------------------------- */
+.l-wrap--calendar {}
+.l-wrap--calendar__inner {}
+.l-wrap--calendar__scroll {
+    overflow-x: scroll;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    /* 横並び */
+    -ms-flex-wrap: nowwrap;
+    flex-wrap: nowwrap;
+    /* 左詰め */
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    background: #fff;
+    padding: 5px 0;
+    border-top: 1px solid #F0F0F0;
+    border-bottom: 1px solid #F0F0F0;
+    li {
+        width: 52px;
+        height: 52px;
+        flex-shrink: 0;
+        padding-top: 14px;
+        text-align: center;
+        margin-right: 3px;
+        @include mq_down(md) {
+            font-size: 12px;
+        }
+        &.today {
+            font-weight: 700;
+            border: 1px solid #EAA524;
+            color: #EAA524;
+            background: #FFFCF7;
+        }
+    }
+}
+
+/* ----------------------------------------------------------------------
+
+    検索ボタン
+
+---------------------------------------------------------------------- */
+.l-wrap--search {
+    @include mq_down(md) {
+        padding: 0 10px;
+        margin-top: 14px;
+    }
+    @include mq_up(md) {
+        padding-bottom: 20px;
+        border-bottom: 1px solid #E0E0E0;
+    }
+}
+.l-wrap--search__inner {
+    @include mq_up(md) {
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        /* 横幅いっぱい */
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        /* 横並び */
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+}
+.l-wrap--search__select {
+    @include mq_up(md) {
+        width: 400px;
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        /* 横幅いっぱい */
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        /* 横並び */
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+}
+.l-wrap--search__select__list {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    /* 横幅いっぱい */
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* 横並び */
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    @include mq_up(md) {
+        width: 100%;
+    }
+    li {
+        width: 24.5%;
+        a {
+            text-align: center;
+            display: block;
+            border-radius: 30px;
+            border: 1px solid #EAA524;
+            color: #EAA524;
+            padding: 10px 0;
+            background: #fff;
+        }
+        &.selected a {
+            background: #EAA524;
+            color: #fff;
+        }
+    }
+}
+.l-wrap--search__area {
+    @include mq_down(md) {
+        margin-top: 14px;
+    }
+    @include mq_up(md) {
+        flex: 1;
+        padding-left: 30px;
+    }
+}
+
+
+
+/* ----------------------------------------------------------------------
+
+    選択ボタン
+
+---------------------------------------------------------------------- */
+.l-wrap--select {
+    margin-top: 14px;
+}
+.l-wrap--select__inner {
+    background: #fff;
+    padding: 10px;
+    select {
+        font-weight: 700;
+        width: 100%;
+        padding: 10px;
+        border-radius: 3px;
+        border: 1px solid #DEDEDE;
+    }
+}
+
+
+/* ----------------------------------------------------------------------
+
+    ボディ
+
+---------------------------------------------------------------------- */
+.l-wrap--body {}
+.l-wrap--body__inner {}
+
+/*
+    検索
+*/
+.l-wrap--body__search {
+    .l-wrap--body__inner {
+        @include mq_down(md) {
+            margin-top: 14px;
+        }
+    }
+}
+
+/*
+    リスト形式
+*/
+.l-wrap--body__list {
+    .l-wrap--body__inner {
+        background: #fff;
+        @include mq_up(md) {
+            border-radius: 3px;
+        }
+    }
+    .l-wrap--body__list__block {
+        margin-top: 14px;
+        @include mq_up(md) {
+            margin-top: 21px;
+        }
+    }
+    li:not(:last-child) {
+        border-bottom: 1px solid #F5F5F5;
+    }
+    .noLink {
+        li {
+            padding: 15px 10px;
+            background: #fff;
+            @include mq_up(md) {
+                padding: 20px;
+            }
+        }
+    }
+    .detailLink {
+        a {
+            padding: 15px 10px;
+            @include mq_up(md) {
+                padding: 20px;
+            }
+        }
+    }
+}
+
+
+/*
+    詳細形式
+*/
+.l-wrap--body__detail {
+    margin-top: 14px;
+    @include mq_up(md) {
+        margin-top: 28px;
+    }
+    .l-wrap--body__inner {
+        @include mq_up(md) {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+        }
+    }
+}
+.l-wrap--body__detail__box {
+    @include mq_down(md) {
+        margin-top: 21px;
+    }
+    @include mq_up(md) {
+        width: 50%;
+    }
+    &.box-left {
+        @include mq_up(md) {
+            padding-right: 20px;
+        }
+    }
+    &.box-right {
+        @include mq_up(md) {
+            padding-left: 20px;
+            border-left: 1px solid #E0E0E0;
+        }
+    }
+}
+.l-wrap--body__detail__header {
+    padding: 5px 10px;
+    @include mq_up(md) {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .headline {
+        font-weight: 700;
+        font-size: 1.1em;
+    }
+}
+.l-wrap--body__detail__table {
+    width: 100%;
+    background: #fff;
+    th, td {
+        padding: 15px 0 15px 10px;
+        @include mq_down(md) {
+            border-bottom: 1px solid #F5F5F5;
+        }
+        @include mq_up(md) {
+            padding: 10px 0 10px 10px;
+        }
+    }
+    th {
+        white-space: nowrap
+    }
+    td {
+        @include mq_down(md) {
+            padding-right: 10px;
+        }
+    }
+}
+
+.table-input {
+    .l-wrap--body__detail__table {
+        @include mq_down(md) {
+            background: #fff;
+        }
+        tr {
+            @include mq_down(md) {
+                padding: 10px 0;
+                border-bottom: 1px solid #F5F5F5;
+                display: block;
+            }
+        }
+        th, td {
+            @include mq_up(md) {
+                padding: 10px 0 0 10px;
+            }
+            @include mq_down(md) {
+                border-bottom: none;
+                display: block;
+                padding: 0 10px;
+            }
+        }
+        th {
+            @include mq_down(md) {
+                font-weight: 400;
+                margin-bottom: 3px;
+                font-size: 12px;
+                color: #858C90;
+            }
+        }
+        input, select, textarea {
+            width: 100%;
+            padding:12px 10px;
+            resize: none;
+            @include mq_up(md) {
+                border: 1px solid #CECECE;
+                border-radius: 3px;
+            }
+            @include mq_down(md) {
+                background: #F7F7F7;
+            }
+        }
+    }
+    .open-detail {
+        display: block;
+        padding: 5px 10px;
+        color: #3E89E0;
+        border-radius: 3px;
+        text-align: center;
+        @include mq_down(md) {
+            background: #fff;
+            padding: 10px;
+        }
+        @include mq_up(md) {
+            border: 1px solid #eee;
+        }
+    }
+}
+
+.l-wrap--body__detail__header {
+    @include mq_down(md) {
+        padding: 0 10px;
+    }
+    .headline {
+        @include mq_down(md) {
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 5px;
+            width: 100%;
+            display: block;
+        }
+    }
+}
+/* 請求書周り */
+.l-wrap--body__detail__box.l-wrap--body__detail__invoice {
+    @include mq_up(md) {
+        width: 100%;
+    }
+}
+.l-wrap--body__detail__invoice {
+    @include mq_up(md) {
+        margin-top: 32px;
+    }
+    .field-invoice {
+        width: 100%;
+        table-layout: fixed;
+    }
+    thead {
+        @include mq_up(md) {
+            background: #F8F9FA;
+            width: 100%;
+        }
+        th {
+            @include mq_up(md) {
+                text-align: center;
+            }
+        }
+    }
+    th, td {
+        @include mq_up(md) {
+            padding: 10px 5px;
+            border: 1px solid #CECECE;
+        }
+        input {
+            @include mq_up(md) {
+                border-bottom: 1px dashed #E2E2E2;
+                padding: 10px;
+                width:  100%;
+            }
+        }
+
+        .total {
+            @include mq_up(md) {
+                display: block;
+                height: 34px;
+                line-height: 34px;
+                width: 100%;
+                background: #F7F7F7;
+            }
+        }
+    }
+    .field-remark {
+        @include mq_up(md) {
+            margin-top: 21px;
+        }
+        p {
+            font-weight: 700;
+            @include mq_up(md) {
+                margin-bottom: 5px;
+            }
+            @include mq_down(md) {
+                padding: 0 10px;
+
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+            span {
+                font-size: 0.9em;
+                font-weight: 400;
+                color: #858C90;
+            }
+        }
+        .field-remark__inner {
+            @include mq_down(md) {
+                background: #fff;
+                padding: 10px;
+            }
+        }
+        textarea {
+            width: 100%;
+            resize: none;
+            padding: 10px;
+            height: 120px;
+            @include mq_down(md) {
+                background: #F7F7F7;
+            }
+            @include mq_up(md) {
+                height: 100px;
+                border: 1px solid #CECECE;
+            }
+        }
+
+    }
+}
+.l-wrap--body__detail__invoice__box {
+    @include mq_down(md) {
+        margin-top: 21px;
+    }
+}
+
+/*
+    ブロックリスト形式
+*/
+.l-wrap--body__block {}
+.l-wrap--body__block__tab {
+    margin-top: 14px;
+    @include mq_up(md) {
+        margin-top: 24px;
+    }
+    ul {
+        li {
+            &:not(:last-child) {
+                margin-right: 5px;
+            }
+            a {
+                text-align: center;
+                display: block;
+                font-size: 14px;
+                font-weight: 700;
+                color: #fff;
+                height: 38px;
+                padding: 0 15px;
+                line-height: 38px;
+                background: #EAA524;
+                border-radius: 3px;
+            }
+        }
+    }
+}
+.l-wrap--body__block__list {
+    background: #fff;
+    margin-top: 14px;
+    @include mq_up(md) {
+        margin-top: 24px;
+    }
+    th {
+        white-space: nowrap;
+    }
+    th, td {
+        padding: 15px 10px;
+        border-bottom: 1px solid #F5F5F5;
+        @include mq_up(md) {
+            padding: 20px;
+        }
+    }
+}
+
+
+
+/*
+    テーブル形式
+*/
+.l-wrap--body.l-wrap--body__table {
+    margin-top: 14px;
+    @include mq_up(md) {
+        margin-top: 30px;
+    }
+}
+.l-wrap--body__table {
+    .l-wrap--body__inner {
+        @include mq_up(md) {
+            background: #fff;
+            border-radius: 3px;
+        }
+    }
+    table {
+        td, th {
+            padding: 15px 10px;
+            img {
+                width: 90%;
+            }
+        }
+        th {
+            white-space: nowrap;
+        }
+    }
+    .l-wrap--body__table__tr__inner {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        .l-wrap--body__table__tr__inner {
+            @include mq_down(md) {
+                display: block;
+            }
+        }
+    }
+}
+
+.l-wrap--body__table__area {
+    .l-wrap--body__table__download {
+        @include mq_down(md) {
+            background: #fff;
+            text-align: center;
+        }
+        @include mq_up(md) {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        a {
+            @include mq_down(md) {
+                display: block;
+                padding: 10px 0;
+                color: #3E89E0;
+            }
+            @include mq_up(md) {
+                padding: 15px;
+                border: 1px solid #E2E2E2;
+                border-radius: 3px;
+                color: #3E89E0;
+            }
+        }
+    }
+    .l-wrap--body__table__button {
+        @include mq_down(md) {
+            margin-top: 14px;
+            background: #fff;
+            padding: 10px;
+            border-bottom: 1px solid #F5F5F5;
+        }
+        @include mq_up(md) {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    }
+    .l-wrap--body__table__thead {
+        color: #C3C3C3;
+        font-size: 13px;
+        line-height: 1.4;
+        border-bottom: 1px solid #E0E0E0;
+        @include mq_down(md) {
+            display: none
+        }
+    }
+    .l-wrap--body__table__tbody {
+        @include mq_down(md) {
+            background: #fff;
+        }
+    }
+    .l-wrap--body__table__tr {
+        @include mq_down(md) {
+            border-bottom: 1px solid #F0F0F0;
+            padding: 15px 10px;
+        }
+    }
+    .l-wrap--body__table__th,
+    .l-wrap--body__table__td {
+        @include mq_down(md) {
+            font-size: 12px;
+        }
+        @include mq_up(md) {
+            padding: 10px;
+        }
+    }
+    .l-wrap--body__table__tbody {
+        .l-wrap--body__table__tr {
+            @include mq_up(md) {
+                border-bottom: 1px solid #F0F0F0;
+            }
+        }
+    }
+}
+
+
+/*
+    リンク形式
+*/
+.l-wrap--body.l-wrap--body__link {
+    @include mq_down(md) {
+        margin-top: 14px;
+    }
+    @include mq_down(md) {
+        background: #fff;
+    }
+    li {
+        border-bottom: 1px solid #F0F0F0;
+        @include mq_up(md) {
+            padding: 15px 10px;
+        }
+        a {
+            color: $colorBlue;
+            @include mq_down(md) {
+                padding: 15px 10px;
+                display: block;
+            }
+        }
+    }
+}
+
+/*
+    入力形式
+*/
+.l-wrap--body__input {
+    @include mq_down(md) {
+        padding: 0;
+        margin-top: 14px;
+    }
+    li {
+        @include mq_up(md) {
+            margin-bottom: 21px;
+        }
+    }
+    .l-wrap--body__input__confirm {
+        @include mq_up(md) {
+            margin-top: 21px;
+        }
+        @include mq_down(md) {
+            padding: 0 10px;
+        }
+        &.c-checkbox--confirm {
+            @include mq_down(md) {
+                margin-bottom: 14px;
+            }
+        }
+    }
+    .l-wrap--body__inner {
+        @include mq_down(md) {
+            background: #fff;
+        }
+    }
+    .l-input__wrap {
+        @include mq_down(md) {
+            padding: 15px 10px;
+            border-bottom: 1px solid #F5F5F5;
+        }
+        input:not([type=file]), textarea, select {
+            @include mq_down(md) {
+                background: #F7F7F7;
+            }
+        }
+    }
+}
+/* 入力タイプ */
+.l-input__wrap {
+    label {
+        font-weight: 700;
+        font-size: 13px;
+        margin-bottom: 5px;
+        width: 100%;
+        display: block;
+    }
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding:12px 10px;
+        resize: none;
+        background: #fff;
+        border: 1px solid #ddd;
+    }
+    textarea {
+        height: 150px;
+        resize: none;
+    }
+    .l-input__wrap__two {
+        width: 49%;
+        span {
+            display: block;
+            margin-bottom: 3px;
+            font-size: .9em;
+            color: #7E7E7E;
+        }
+    }
+}
+
+.l-input__file {
+    background: #fff;
+    .l-input__preview {
+        padding: 20px;
+        text-align: center;
+        @include mq_up(md) {
+            border-bottom: 1px solid #F0F0F0;
+        }
+        img {
+            width: 200px;
+        }
+        button {
+            display: block;
+            width: 140px;
+            padding: 7px 0;
+            text-align: center;
+            margin: 20px auto auto;
+            margin-top: 20px;
+            border-radius: 3px;
+            border: 1px solid $colorRed;
+            color: $colorRed;
+        }
+    }
+    .l-input__upload {
+        position: relative;
+        @include mq_up(md) {
+            padding: 12px 10px;
+        }
+        input[type=file] {
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+        img {
+            width: 25px;
+            margin-right: 10px;
+        }
+    }
+}
+
+
+/* セレクトタイプ */
+.l-select__wrap {}
+.l-select__area {
+    width: 30px;
+}
+.l-select__detail {
+    flex: 1;
+}
+
+/* 並び替えタイプ */
+.l-order__wrap {}
+.l-order__detail {
+    flex: 1;
+}
+.l-order__area {
+    width: 40px;
+    span {
+        margin: auto 0 6px auto;
+        display: block;
+        height: 2px;
+        border-radius: 5px;
+        width: 30px;
+        background: #BFBFBF;
+    }
+}
+
+/*
+    テーブル形式
+*/
+.l-wrap--body__pdf {
+    padding: 0px 100px;
+    margin-top: 14px;
+    @include mq_up(md) {
+        margin-top: 28px;
+    }
+}
+.l-wrap--body__pdf__panel {
+    background: #F0F4F5;
+    @include mq_up(md) {
+        padding: 45px 80px;
+    }
+    .l-wrap--body__pdf__inner {
+        background: #fff;
+        height: 660px;
+    }
+}
+
+
+
+
+/* メニュー */
+.l-wrap--body__detail__list {
+    li {
+        padding: 5px 10px;
+        background: #fff;
+        @include mq_down(md) {
+            padding: 15px 10px;
+            border-bottom: 1px solid #eee;
+        }
+        @include mq_up(md) {
+            text-align: center;
+        }
+        a {
+            display: block;
+            text-align: center;
+            @include mq_up(md) {
+                display: inline-block;
+                width: 200px;
+                padding: 5px;
+                border: 1px solid #E0E0E0;
+                border-radius: 3px;
+            }
+            color: $colorBlue;
+        }
+    }
+}

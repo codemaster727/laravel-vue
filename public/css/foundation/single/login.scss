@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+$breakpoint-up: (
+  'sm': 'screen and (min-width: 400px)',
+  'md': 'screen and (min-width: 896px)',
+  'lg': 'screen and (min-width: 1020px)',
+) !default;
+
+$breakpoint-down: (
+  'sm': 'screen and (max-width: 399px)',
+  'md': 'screen and (max-width: 897px)',
+  'lg': 'screen and (max-width: 1020px)',
+) !default;
+
+@mixin mq_up($breakpoint: md) {
+  @media #{map-get($breakpoint-up, $breakpoint)} {
+    @content;
+  }
+}
+
+@mixin mq_down($breakpoint: md) {
+  @media #{map-get($breakpoint-down, $breakpoint)} {
+    @content;
+  }
+}
+
+
+$colorYellow: #EAA524;
+$colorRed: #ED4646;
+$colorGreem: #5CC964;
+$colorBlue: #3E89E0;
+$bgMainColor: #F6F5F7;
+
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+  common
+
+
+
+------------------------------------------------------------------------------------------*/
+.l-login {
+  margin: auto;
+  width: 100%;
+  @include mq_up(md) {
+    width: 375px;
+  }
+  &.long-ver {
+    @include mq_up(md) {
+      width: 460px;
+    }
+  }
+}
+
+/* 見出し */
+.l-login__title {
+  text-align: center;
+  padding: 32px 0;
+  &.l-user__header {
+    @include mq_up(md) {
+      padding: 54px 0 32px;
+    }
+    .l-user__header__inner {
+      position: relative;
+    }
+    @include mq_down(md) {
+      background: #fff;
+      padding: 20px 0;
+      margin-bottom: 32px;
+      h1 {
+        font-size: 16px;
+      }
+      
+    }
+    .l-user__header__back {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      img {
+        width: 10px;
+      }
+    }
+  }
+  @include mq_up(md) {
+    padding: 78px 0 32px;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+/* 本体 */
+.l-login__body {
+  background: #fff;
+  padding: 45px;
+}
+
+
+/* 戻るボタン */
+.l-login__back {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #F2F2F2;
+  text-align: center;
+}

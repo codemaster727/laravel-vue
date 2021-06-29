@@ -1,0 +1,83 @@
+.l-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background: rgba(0,0,0,0.7);
+    &.open {
+        display: block;
+    }
+    @include mq_up(md) {
+
+    }
+    .l-modal__inner {
+        width: 100%;
+        height: 100%;
+    }
+    .l-modal__iosModel {
+        background: #fff;
+        border-radius: 20px;
+        width: 260px;
+        @include mq_up(md) {
+            width: 300px;
+        }
+        .trueFalse {
+            margin-top: 20px;
+            li {
+                width: 50%;
+                text-align: center;
+                a {
+                    display: inline-block;
+                    padding: 3px;
+                    color: $colorYellow;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+    .l-modal__iosModel__inner {
+        padding: 22px 16px;
+    }
+}
+
+/* リスト形式のモーダル */
+.l-modak__list {
+    &:not(:last-child) {
+        border-bottom: 1px solid #F4F4F4;
+    }
+    a {
+        padding: 22px 10px;
+        text-align: center;
+        display: block;
+        color: $colorBlue;
+    }
+}
+/* 入力形式のモーダル */
+.l-modal--area__input {
+    background: #fff;
+    border-radius: 10px;
+    padding: 40px 20px;
+    width: 300px;
+    .l-modal--area__input__box {
+        margin-bottom: 14px;
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            background: #F7F7F7;
+            border: 1px solid #e8e8e8;
+        }
+        & > span {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 3px;
+            border-bottom: 1px dashed #c4c4c4;
+        }
+    }
+}

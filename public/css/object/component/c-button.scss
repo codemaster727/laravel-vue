@@ -1,0 +1,112 @@
+/* 通常のsubmit */
+.c-button--yellowRounded {
+	width: 100%;
+	text-align: center;
+	background: #EAA524;
+	color: #fff;
+	border-radius: 30px;
+	padding: 15px 0;
+	&.notSubmit {
+		background: #E5E5E5;
+	}
+}
+a.c-button--yellowRounded {
+	display: block;
+}
+
+.c-button--blueRounded {
+	width: 100%;
+	text-align: center;
+	background: #333333;
+	color: #fff;
+	border-radius: 30px;
+	padding: 15px 0;
+	&.notSubmit {
+		background: #E5E5E5;
+	}
+}
+a.c-button--blueRounded {
+	display: block;
+}
+.c-button--attention {
+	display: block;
+	padding: 5px 10px;
+	color: #3E89E0;
+	border: 1px solid #eee;
+	border-radius: 3px;
+}
+
+/* サブのリンク */
+.c-sublink {
+	display: inline-block;
+	margin-top: 10px;
+	font-size: 12px;
+	@include mq_up(md) {
+		font-size: 13px;
+	}
+}
+
+
+/* ボーダー付きボタン */
+.c-button--border {
+	padding: 15px;
+	border: 1px solid #E2E2E2;
+	border-radius: 3px;
+	color: $colorBlue;
+}
+
+/* 追加ボタン */
+.c-button--addGreen {
+	display: inline-block;
+	position: relative;
+	padding: 10px 0 10px 30px;
+	color: $colorBlue;
+	@include mq_up(md) {
+		padding: 15px 25px 15px 45px;
+		border: 1px solid #E2E2E2;
+		border-radius: 3px;
+	}
+	&:before {
+		content: "";
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		background: url(../../../img/icon-button-add.png) no-repeat center / contain;
+		@include mq_up(md) {
+			left: 10px;
+		}
+	}
+}
+.c-button--addYellow {
+	position: relative;
+	border-radius: 30px;
+	color: $colorYellow;
+	border: 1px solid $colorYellow;
+	padding: 10px 30px 10px 20px;
+	&:before {
+		content: "";
+		display: block;
+		width: 14px;
+		height: 14px;
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		background: url(../../../img/icon-button-plus-yellow.png) no-repeat center / contain;
+	}
+}
+a.c-button--addYellow {
+	display: block;
+}
+
+
+
+/* ラインボタン */
+.c-button--line {
+    a {
+        background: #00B900 !important;
+    }
+}

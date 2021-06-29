@@ -1,0 +1,59 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.21.1",
+        "bootstrap": "^4.5.0",
+        "cross-env": "^7.0",
+        "jquery": "^3.2",
+        "laravel-mix": "^5.0.1",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.26.10",
+        "sass-loader": "^8.0.0",
+        "vue": "^2.6.11",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "name": "yes",
+    "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
+    "version": "1.0.0",
+    "main": "webpack.mix.js",
+    "directories": {
+        "test": "tests"
+    },
+    "dependencies": {
+        "date-fns": "^2.16.0",
+        "dayjs": "^1.10.4",
+        "moment": "^2.29.1",
+        "node-gyp": "^7.0.0",
+        "numeral": "^2.0.6",
+        "run": "^1.4.0",
+        "swiper": "^6.2.0",
+        "v-movable": "^0.3.2",
+        "vue-awesome-swiper": "^4.1.1",
+        "vue-clipboard2": "^0.3.1",
+        "vue-html2canvas": "0.0.4",
+        "vuedraggable": "^2.24.3",
+        "vuejs-datepicker": "^1.6.2",
+        "vuex": "^3.6.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nakazawakan/ZOTMAN.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/nakazawakan/ZOTMAN/issues"
+    },
+    "homepage": "https://github.com/nakazawakan/ZOTMAN#readme"
+}

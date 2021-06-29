@@ -1,0 +1,53 @@
+.l-button--submit {
+    margin-top: 32px;
+    text-align: center;
+    button,
+    input {
+        max-width: 320px;
+    }
+    a {
+        margin: auto;
+        max-width: 320px;
+    }
+}
+
+
+.l-button--add {
+    margin-top: 21px;
+}
+
+.l-editButton {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    /* 横幅いっぱい */
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* 横並び */
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0px 10px;
+    width: 100%;
+    &.three__box li {
+        width: 32%;
+    }
+    &.two__box li {
+        width: 49%;
+    }
+    &.one__box li {
+        width: 50%;
+        margin: auto;
+    }
+    li a {
+        border-radius: 3px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        background: #EAA524;
+        color: #fff;
+    }
+}
+
+

@@ -1,0 +1,351 @@
+@charset "UTF-8";
+
+$breakpoint-up: (
+    'sm': 'screen and (min-width: 400px)',
+    'md': 'screen and (min-width: 896px)',
+    'lg': 'screen and (min-width: 1020px)',
+) !default;
+
+$breakpoint-down: (
+    'sm': 'screen and (max-width: 399px)',
+    'md': 'screen and (max-width: 897px)',
+    'lg': 'screen and (max-width: 1020px)',
+) !default;
+
+@mixin mq_up($breakpoint: md) {
+    @media #{map-get($breakpoint-up, $breakpoint)} {
+        @content;
+    }
+}
+
+@mixin mq_down($breakpoint: md) {
+    @media #{map-get($breakpoint-down, $breakpoint)} {
+        @content;
+    }
+}
+
+$colorYellow: #EAA524;
+$colorRed: #ED4646;
+$colorGreem: #5CC964;
+$colorBlue: #3E89E0;
+$colorNavy: #424758;
+$bgMainColor: #F6F5F7;
+
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    common - tag
+
+
+
+------------------------------------------------------------------------------------------*/
+* {
+    font-size:100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+a {
+    cursor: pointer;
+}
+body {
+    font-size: 14px;
+    color: #3C3C3B;
+    background: #F5F5F5;
+}
+main {
+    position: relative;
+}
+input::placeholder {
+    color: #CBCBCB;
+}
+textarea::placeholder {
+    color: #CBCBCB;
+}
+
+/* IE */
+input:-ms-input-placeholder {
+    color: #CBCBCB;
+}
+textarea:-ms-input-placeholder {
+    color: #CBCBCB;
+}
+
+/* Edge */
+input::-ms-input-placeholder {
+    color: #CBCBCB;
+}
+textarea::-ms-input-placeholder {
+    color: #CBCBCB;
+}
+img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    common - css
+
+
+
+------------------------------------------------------------------------------------------*/
+/* カラー */
+.color-navyGray {
+    color: #858C90;
+}
+.color-gray {
+    color: #CECECE;
+}
+.color-red {
+    color: #D51F1F;
+}
+.textLink {
+    color: $colorBlue;
+}
+
+/* エラー */
+.invalid-feedback {
+    display: block;
+    margin-top: 5px;
+    color: #D51F1F;
+    background: #EDD4D1;
+    border-radius: 1px;
+    padding: 10px;
+}
+
+/* 位置 */
+.textCenter {
+    text-align: center;
+}
+.textRight {
+    text-align: right;
+}
+.is-hidden {
+    opacity: 0 !important;
+    display: none !important;
+}
+.sp-only {
+    @include mq_up(md) {
+        display: none !important;
+    }
+}
+.pc-only {
+    @include mq_down(md) {
+        display: none !important;
+    }
+}
+.allWrapper {
+    width: 100%;
+    @include mq_up(md) {
+        width: 960px;
+        min-width: 960px;
+        margin: auto;
+    }
+}
+.vdp-datepicker input {
+    background: #fff;
+}
+
+
+
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    z-index
+
+
+
+------------------------------------------------------------------------------------------*/
+#nav-owner { z-index: 1; }
+#header-user, #header { z-index: 13; }
+#nav { z-index: 10; }
+.l-alart { z-index: 12; }
+.l-search { z-index: 20; }
+.l-modal { z-index: 20; }
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    keyframe
+
+
+
+------------------------------------------------------------------------------------------*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        display: none
+    }
+    to {
+        opacity: 1;
+        display: block;
+    }
+}
+@keyframes alartFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-101px);
+    }
+}
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    header.php
+
+
+
+------------------------------------------------------------------------------------------*/
+#header {
+    position: relative;
+    background: #fff;
+    padding: 16px 0;
+    @include mq_up(md) {
+        padding: 24px 0;
+    }
+    .header__inner {
+        text-align: center;
+        h1 {
+            font-size: 14px;
+            @include mq_up(md) {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    header-user.php
+
+
+
+------------------------------------------------------------------------------------------*/
+#header-user {
+    position: relative;
+    .header-user__top {
+        padding: 10px 0;
+        background: #F5F5F5;
+    }
+    .header-user__top__search {
+        width: 300px;
+        border: 1px solid #E5E5E5;
+    }
+    .header-user__bottom {
+        background: #424758;
+        li.selected a {
+            background: $colorYellow;
+        }
+        a {
+            color: #fff;
+            display: block;
+            padding: 15px 20px;
+        }
+    }
+}
+
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    nav.php
+
+
+
+------------------------------------------------------------------------------------------*/
+#nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #F5F5F5;
+    li {
+        width: 20%;
+        border-top: 2px solid #fff;
+        a {
+            display: block;
+            width: 100%;
+            height: 50px;
+            display:-webkit-box;
+            display:-ms-flexbox;
+            display:flex;
+            /* 横並び */
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-align-items: center;
+            -ms-align-items: center;
+            align-items: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            img {
+                width: 20px;
+                margin-bottom: 5px;
+            }
+            span {
+                text-align: center;
+                font-size: 10px;
+            }
+        }
+
+        &.selected {
+            border-top: 2px solid $colorYellow;
+        }
+    }
+    &.two-nav li {
+        width: 50%;
+    }
+}
+
+
+
+/*-----------------------------------------------------------------------------------------
+
+
+
+    footer.php
+
+
+
+------------------------------------------------------------------------------------------*/
+#footer {
+    margin: 32px 0 15px;
+    @include mq_up(md) {
+        margin-top: 72px;
+    }
+}
+.copyright {
+    text-align: center;
+    color: #BFBFBF;
+    font-size: 12px;
+}

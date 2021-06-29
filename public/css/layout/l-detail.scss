@@ -1,0 +1,134 @@
+.l-detail {
+    .allWrapper {
+        @include mq_up(md) {
+            width: 500px;
+            min-width: 500px;
+            margin: auto;
+        }
+    }
+    .l-detail__wrap {
+
+    }
+    .l-detail__header {
+        @include mq_up(md) {
+            padding: 54px 0 32px;
+        }
+    }
+    .l-detail__header__inner {
+        position: relative;
+    }
+    .l-detail__header__title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        @include mq_up(md) {
+            font-size: 20px;
+        }
+        @include mq_down(md) {
+            background: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+    }
+    .l-detail__header__back {
+        position: absolute;
+
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        @include mq_up(md) {
+            background: #fff;
+        }
+        @include mq_down(md) {
+            left: 10px;
+        }
+        a {
+            display: block;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        img {
+            width: 10px;
+            vertical-align: middle;
+        }
+    }
+
+
+}
+.l-detail__body {
+
+}
+.l-detail__body__box {
+    @include mq_down(md) {
+        margin-top: 12px;
+    }
+}
+
+/* ボタン一覧 */
+.l-detail__body__button {
+    @include mq_up(md) {
+        margin-bottom: 24px;
+    }
+    &.two-button {
+        li {
+            width: 120px;
+            &:first-child {
+                margin-right: 10px;
+            }
+        }
+    }
+    &.three-button {
+        li {
+            width: 32%;
+        }
+    }
+    a {
+        text-align: center;
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        height: 38px;
+        padding: 0 15px;
+        line-height: 38px;
+        // border: 1px solid #CECECE;
+        background:#EAA524;
+        border-radius: 3px;
+    }
+}
+
+/* ボディ一覧 */
+.l-detail__body__content {
+    background: #fff;
+    @include mq_up(md) {
+        padding: 20px;
+        border-radius: 3px;
+    }
+}
+
+/* テーブル */
+.l-detail__body__content__table {
+    width: 100%;
+    th, td {
+        padding: 15px 10px;
+        border-bottom: 1px solid #F5F5F5;
+        @include mq_up(md) {
+            padding: 20px 10px;
+        }
+    }
+    tr:last-child {
+        th, td {
+            border-bottom: none;
+        }
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+.l-tracking {
+	@include mq_down(md) {
+		padding-bottom: 120px;
+	}
+}
+.l-trackingFooter {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-top: 1px solid #F0F0F0;
+	margin-top: 100px;
+	@include mq_up(md) {
+		width: 960px;
+		min-width: 960px;
+		margin: auto;
+		border: 1px solid #E5E5E5;
+	}
+	.l-trackingFooter__inner {
+		background: #fff;
+		@include mq_up(md) {
+			padding: 10px 0;
+			display:-webkit-box;
+			display:-ms-flexbox;
+			display:flex;
+			/* 横並び */
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-box-pack: end;
+			-ms-flex-pack: end;
+			justify-content: flex-end;
+		}
+	}
+	.l-trackingFooter__box {
+		padding: 10px;
+		@include mq_up(md) {
+			padding: 10px 30px;
+			display:-webkit-box;
+			display:-ms-flexbox;
+			display:flex;
+			/* 横幅いっぱい */
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+			justify-content: space-between;
+			/* 横並び */
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-align-items: center;
+			-ms-align-items: center;
+			align-items: center;
+		}
+		&:not(:last-child) {
+			@include mq_up(md) {
+				border-right: 1px solid #F0F0F0;
+			}
+		}
+		table {
+			margin-left: auto;
+		}
+	}
+	.l-trackingFooter__simutale {
+		text-align: right;
+		@include mq_down(md) {
+			border-bottom: 1px solid #F0F0F0;
+		}
+		table {
+			color: #BFBFBF;
+			font-size: 0.9em;
+		}
+	}
+	.l-trackingFooter__total {
+		table {
+			@include mq_up(md) {
+				font-size: 1.1em;
+			}
+		}
+	}
+	.l-button--submit {
+		margin-top: 0px;
+		input {
+			@include mq_up(md) {
+				width: 400px;
+			}
+		}
+	}
+}

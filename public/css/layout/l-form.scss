@@ -1,0 +1,246 @@
+/* フォームを囲む */
+.l-form__area {
+  @include mq_down(md) {
+    padding: 0 20px;
+  }
+}
+
+/* フォーム内のテキストのみ */
+.l-form__explain {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ラベル付きinput */
+.l-input--label,
+.l-inputLabel {
+  label {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 5px;
+    width: 100%;
+    display: block;
+    span {
+      color: #858C90;
+      font-weight: 400;
+    }
+  }
+  input, select, textarea {
+    width: 100%;
+    padding:12px 10px;
+    resize: none;
+  }
+  textarea {
+    height: 130px;
+    @include mq_up(md) {
+      height: 180px;
+    }
+  }
+  /* 色の選択 */
+  .color__list {
+    background: #fff;
+    padding: 10px;
+    @include mq_up(md) {
+      padding: 20px;
+    }
+    li {
+      position: relative;
+      width: 17%;
+      &:nth-child(-n+5) {
+        margin-bottom: 10px;
+      }
+    }
+
+    input[type=radio] {
+      opacity: 0;
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      &:checked + label {
+        border: 10px solid #fff;
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+        &.color1:after {
+          border: 1px solid #F1D0F4;
+        }
+        &.color2:after {
+          border: 1px solid #D66767;
+        }
+        &.color3:after {
+          border: 1px solid #D6B467;
+        }
+        &.color4:after {
+          border: 1px solid #F5F3C0;
+        }
+        &.color5:after {
+          border: 1px solid #BABABA;
+        }
+        &.color6:after {
+          border: 1px solid #D0D3F4;
+        }
+        &.color7:after {
+          border: 1px solid #C1DDF5;
+        }
+        &.color8:after {
+          border: 1px solid #D0F4F3;
+        }
+        &.color9:after {
+          border: 1px solid #ABD667;
+        }
+        &.color10:after {
+          border: 1px solid #000000;
+        }
+      }
+    }
+    .color__box {
+      position: relative;
+      display: block;
+      width: 100%;
+      margin-bottom: 0;
+      &:before {
+        content: "";
+        padding-top: 100%;
+        display: block;
+      }
+    }
+    .color1 { background: #F1D0F4; }
+    .color2 { background: #D66767; }
+    .color3 { background: #D6B467; }
+    .color4 { background: #F5F3C0; }
+    .color5 { background: #BABABA; }
+    .color6 { background: #D0D3F4; }
+    .color7 { background: #C1DDF5; }
+    .color8 { background: #D0F4F3; }
+    .color9 { background: #ABD667; }
+    .color10 { background: #000000; }
+  }
+}
+
+/* 検索機能(スマホのみ) */
+.l-search {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    .l-search__area {
+        background: #fff;
+        padding: 20px 10px;
+        input {
+            width: 100%;
+            padding: 14px 10px 14px 35px;
+            text-align: left;
+            border: 1px solid #F0F0F0;
+        }
+    }
+}
+
+/* datepicker */
+.vue-right .vdp-datepicker__calendar {
+  right: 0;
+}
+
+/* 表示・非表示 */
+.l-hidden {
+  opacity: 0 !important;
+  display: none !important;
+  animation-name: fadeIn;
+  animation-duration: .3s;
+  &.open {
+    opacity: 1 !important;
+    display: block !important;
+  }
+}
+
+/* 撮影項目の写真のダウンロード */
+.l-form__download {
+  padding: 0;
+  @include mq_up(md) {
+  }
+  .l-button--submit {
+    padding: 20px;
+    @include mq_up(md) {
+      padding: 40px;
+    }
+  }
+}
+.l-form__download__list {
+  background: #fff;
+  li {
+    padding: 20px;
+    border-bottom: 1px solid #F5F5F5;
+    @include mq_up(md) {
+      padding: 30px;
+    }
+  }
+}
+.l-form__download__wrap {
+  .check {
+    width: 34px;
+    input {
+      width: 20px;
+    }
+  }
+  .img {
+    width: 80px;
+    img {
+      width: 90%;
+    }
+  }
+  .text {
+    flex: 1;
+    .title {
+      margin-bottom: 7px;
+      font-weight: 700;
+      @include mq_up(md) {
+        font-size: 16px;
+      }
+    }
+    .detail {
+      color: #BFBFBF;
+      margin-bottom: 5px;
+      @include mq_down(md) {
+        font-size: 13px;
+      }
+    }
+    .remark {
+      color: #BFBFBF;
+      @include mq_down(md) {
+        font-size: 13px;
+      }
+    }
+  }
+  .order {
+    width: 40px;
+    span {
+      margin: auto 0 6px auto;
+      display: block;
+      height: 2px;
+      border-radius: 5px;
+      width: 30px;
+      background: #BFBFBF;
+    }
+  }
+}
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+<template>
+    <div class="l-wrap--inner">
+        <div class="l-alart errorAlart" v-if="hasError">
+            <p>エラーが発生しました。</p>
+        </div>
+        <div class="l-alart successAlart" v-if="hasSuccess">
+            <p>営業担当者追加に成功されました。</p>
+        </div>
+
+        <div class="l-wrap--header">
+            <div class="l-wrap--header__inner">
+                <div class="l-wrap--header__back">
+                    <a href="/user/member">
+                        <img src="/img/icon-arrow-left-black.png">
+                    </a>
+                </div>
+                <h1 class="l-wrap--header__title u-w100per">営業担当者を追加</h1>
+            </div>
+        </div>
+        <div class="l-wrap--body l-wrap--body__input">
+            <div class="l-wrap--body__inner">
+                <ul class="noLink">
+                    <li>
+                        <div class="l-input__wrap">
+                            <label>営業担当者名</label>
+                            <input :class="{'is-invalid': errorMsg.name != ''}" type="" name="" v-model="name" placeholder="営業担当者の名前">
+                            <span v-if="errorMsg.name" class="invalid-feedback">{{ errorMsg.name }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="l-input__wrap">
+                            <label>社内メモ</label>
+                            <textarea :class="{'is-invalid': errorMsg.memo != ''}" v-model="memo"></textarea>
+                            <span v-if="errorMsg.memo" class="invalid-feedback">{{ errorMsg.memo }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="l-button--submit">
+                <button class="c-button--yellowRounded" type="submit" @click.prevent.stop="registerMember">追加する</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    var numeral = require('numeral');
+
+    Vue.filter("formatNumber", function (value) {
+        return numeral(value).format("0,0");
+    });
+
+	export default {
+		data() {
+			return {
+                name: '',
+                memo: '',
+                errorMsg: {
+                    name: '',
+                    memo: '',
+                },
+                hasError: false,
+                hasSuccess: false,
+			}
+		},
+		created: function() {
+			// 必要に応じて、初期表示時に使用するLaravelのAPIを呼び出すメソッドを定義
+		},
+		computed: {},
+		methods: {
+            registerMember: function() {
+                this.hasError = false;
+                this.hasSuccess = false;
+                let params = {
+                    name: this.name,
+                    memo: this.memo,
+                }
+                axios.post('/api/user/members', params)
+                    .then(result => {
+                        this.hasSuccess = true;
+                        this.errorMsg = {
+                            name: '',
+                            memo: '',
+                        }
+                        setTimeout(function() {
+                            location.href = '/user/member';
+                        }, 1000);
+                    })
+                    .catch(error => {
+                        this.hasError = true;
+                        let errorMsg = error.response.data.errors;
+                        if (errorMsg) {
+                            if (errorMsg.name) {
+                                this.errorMsg.name = errorMsg.name[0];
+                            }
+                            if (errorMsg.memo) {
+                                this.errorMsg.memo = errorMsg.memo[0];
+                            }
+                        }
+                    });
+            },
+        },
+		watch: {},
+	}
+</script>

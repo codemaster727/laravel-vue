@@ -1,0 +1,57 @@
+.l-flex {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    /* 横幅いっぱい */
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* 横並び */
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    &.l-start {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    &.l-end {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+    }
+    &.l-center {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+    &.l-v__top {
+        -webkit-align-items: flex-start;
+        -ms-align-items: flex-start;
+        align-items: flex-start;
+    }
+    &.l-v__bottom {
+        -webkit-align-items: flex-end;
+        -ms-align-items: flex-end;
+        align-items: flex-end;
+    }
+    &.l-v__center {
+        -webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+    }
+    @include mq_down(md) {
+        &.l-sp__column {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+    }
+    @include mq_up(md) {
+        &.l-center_pc {
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+    }
+}

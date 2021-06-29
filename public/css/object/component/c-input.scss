@@ -1,0 +1,282 @@
+/* ----------------------------------------------------------------------
+
+  input
+
+---------------------------------------------------------------------- */
+/* 色付き */
+.c-input--gray {
+    background: #F4F4F4;
+}
+.c-input--white {
+    background: #fff;
+}
+
+/* 特殊input */
+.c-input--post__one {
+    width: 60px !important;
+    margin-right: 10px;
+}
+.c-input--post__two {
+    width: 90px !important;
+}
+.c-input__supplement__box {
+    width: 49.5%;
+    span {
+        display: block;
+        margin-bottom: 3px;
+        font-size: 12px;
+        color: #858C90;
+    }
+}
+.c-input__supplement__wrap {
+    margin-bottom: 10px;
+}
+
+
+/* ----------------------------------------------------------------------
+
+  ファイル
+
+---------------------------------------------------------------------- */
+
+/* 写真 */
+.c-input--file {
+    background: #fff;
+    padding:12px 10px;
+    input {
+        padding: 0;
+    }
+    .c-input--file__preview {
+        padding: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #F0F0F0;
+    }
+}
+
+
+/* ----------------------------------------------------------------------
+
+  検索エリア
+
+---------------------------------------------------------------------- */
+.c-input--search {
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url(../../../img/icon-search-black.png) no-repeat center/contain;
+    }
+    input {
+        width: 100%;
+        padding: 12px 10px 12px 35px;
+        background: #fff;
+        border-radius: 30px;
+        border: 1px solid #E5E5E5;
+        @include mq_up(md) {
+            border: 1px solid #DEDEDE;
+        }
+    }
+}
+
+
+
+/* ----------------------------------------------------------------------
+
+  checkbox
+
+---------------------------------------------------------------------- */
+.c-checkbox--select {
+    input {
+        display: none;
+        opacity: 0;
+        z-index: -1;
+    }
+    input:checked ~ .c-checkbox--color {
+        background: #EAA524;
+        border: 1px solid #EAA524;
+        &:after {
+            display: block;
+        }
+    }
+}
+.c-checkbox--color {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    &:after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 7px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        color: #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+}
+
+/* ----------------------------------------------------------------------
+
+  selectbox
+
+---------------------------------------------------------------------- */
+/* 三角付きselectボタン */
+.c-selectBox {
+    position: relative;
+        &:before {
+        content: "";
+        z-index: 10;
+        display: block;
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url(../../../img/icon-arrow-bottom-black.png) no-repeat center / contain;
+    }
+}
+.c-select--triangle {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 7.5px 0 7.5px;
+        border-color: #000000 transparent transparent transparent;
+
+    }
+}
+/* 確認要チェックボックス */
+.c-checkbox--confirm {
+    margin-bottom: 32px;
+    input {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+    }
+}
+
+.c-search--box {
+  position: relative;
+  &:before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(../../../img/icon-search-navy.png) no-repeat center / contain;
+  }
+  &.left:before {
+    left: 10px;
+    right: auto;
+  }
+}
+
+
+/* ----------------------------------------------------------------------
+
+  textarea
+
+---------------------------------------------------------------------- */
+.c-textarea__inHouseMemo {
+  padding: 0 10px 10px;
+  textarea {
+    padding: 10px;
+    width: 100%;
+    height: 60px;
+    background: #F7F7F7;
+    color: #3E89E0;
+    resize: none;
+    font-size: 13px;
+  }
+}
+.c-textarea--inHouseMemo {
+    padding: 10px;
+    width: 100%;
+    height: 60px;
+    background: #F7F7F7;
+    color: #3E89E0;
+    resize: none;
+}
+
+
+/* ----------------------------------------------------------------------
+
+  textarea
+
+---------------------------------------------------------------------- */
+.l-input--new {
+
+}
+
+
+
+/* ----------------------------------------------------------------------
+
+    コピー機能
+
+---------------------------------------------------------------------- */
+.l-input--copy {
+    margin-top: 1em;
+    input {
+        width: 100%;
+    }
+}
+.l-input--copy__inner {
+    position: relative;
+    background: #eeeeee;
+    padding: 15px;
+    border-radius: 3px;
+    button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+    span {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: inline-block;
+        padding: 3px;
+        border-radius: 1px;
+        background: #6e6e6e;
+        color: #fff;
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+
+
+

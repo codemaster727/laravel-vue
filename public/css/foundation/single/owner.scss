@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+/* --------------------------------------------------------------------------------------------------------------
+
+
+    wrap
+
+
+-------------------------------------------------------------------------------------------------------------- */
+main {}
+.l-owner--wrap {
+    padding: 42px 30px 0 30px;
+}
+.l-owner--wrap__table {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+.l-owner--wrap__detail {
+    width: 100%;
+    max-width: 580px;
+    margin: auto;
+}
+
+/* --------------------------------------------------------------------------------------------------------------
+
+
+    nav
+
+
+-------------------------------------------------------------------------------------------------------------- */
+#nav-owner {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 220px;
+    background: #fff;
+}
+.l-nav--logo {
+    text-align: center;
+    padding: 20px 0;
+}
+.l-nav--box {
+    margin-bottom: 10px;
+}
+.l-nav--box__head {
+    padding: 12px;
+    font-weight: 700;
+}
+.l-nav--box__list {
+    padding-left: 15px;
+    &.selected a {
+        background: #FAF6EF;
+    }
+    a {
+        display: block;
+        padding: 10px;
+    }
+}
+
+
+/* --------------------------------------------------------------------------------------------------------------
+
+
+    main
+
+
+-------------------------------------------------------------------------------------------------------------- */
+main {
+    padding-left: 220px;
+}
+
+/*
+    header
+*/
+.l-owner--head {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+/*
+    tab
+*/
+.l-owner--tab {
+    margin-bottom: 30px;
+}
+.l-owner--tab__list {
+    width: 100%;
+    &.three-tab li {
+        width: 33%;
+    }
+    &.two-tab li {
+        width: 49%;
+    }
+    li {
+        a {
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            display: block;
+            border-radius: 3px;
+            padding: 15px 0;
+        }
+        &.stop a {
+            background: #EAA524;
+        }
+        &.start a {
+            background: #3E89E0;
+        }
+        &.delete a {
+            background: #9B1C1C;
+        }
+    }
+}
+
+/*
+    body
+*/
+.l-owner--body {
+    padding: 24px 42px;
+    background: #fff;
+    border: 1px solid #eeeeee;
+}
+/* 検索機能 */
+.l-owner--body__search {
+    margin-bottom: 24px;
+}
+.l-owner--body__search__left {}
+.l-owner--body__search__left__content {
+    width: 193px;
+    margin-right: 10px;
+    select {
+        width: 100%;
+        padding: 12px 10px;
+        border: 1px solid #EBEBEB;
+    }
+}
+.l-owner--body__search__right__content {
+    input {
+        padding: 12px 10px;
+    }
+    .input-box {
+        width: 240px;
+        input {
+            width: 100%;
+            border: 1px solid #E3E3E3;
+        }
+    }
+    .submit-box {
+        input[type=submit] {
+            background: #EAA524;
+            color: #fff;
+        }
+    }
+}
+
+/* テーブル */
+.l-owner--body__table {}
+.l-owner--body__thead {
+    color: #858C90;
+    font-size: 0.9em;
+}
+.l-owner--body__tr {
+    border-bottom: 1px solid #EDEDED;
+}
+.l-owner--body__td {
+    padding: 10px;
+    line-height: 1.4;
+    textarea {
+        width: 100%;
+        padding: 10px;
+        resize: none;
+        border-radius: 3px;
+        background: #FAFAFA;
+        border: 1px solid #DDDDDD;
+        height: 130px;
+    }
+    .td-button {
+        a {
+            display: block;
+            color: #fff;
+            width: 65px;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            &.edit {
+                background: #333333;
+            }
+            &.start {
+                background: #3E89E0;
+            }
+            &.stop {
+                background: #9B1C1C;
+            }
+        }
+    }
+    .add-history {
+        background: #f7f7f7;
+        font-size: 12px;
+        border: 1px solid #ededed;
+        width: 100%;
+        border-radius: 1px;
+        td, th {
+            padding: 5px;
+        }
+    }
+}
+
+
+/* input */
+.l-owner--body__input {}
+.l-owner--body__input__content {
+    margin-bottom: 21px;
+    label {
+        display: block;
+        margin-bottom: 3px;
+    }
+    input, select, textarea {
+        width: 100%;
+        resize: none;
+        padding: 10px;
+        background: #F4F4F4;
+    }
+    textarea {
+        height: 130px;
+    }
+}
+
+
+/* submit */
+.l-owner--body__submit {
+    margin-top: 40px;
+}
+
+
+
+
+
+

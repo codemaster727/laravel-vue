@@ -1,0 +1,92 @@
+.c-box--color {
+    display: block;
+    width: 40px;
+    height: 40px;
+    &.color1 { background: rgb(213, 0, 0); }
+    &.color2 { background: rgb(230, 124, 115); }
+    &.color3 { background: rgb(244, 81, 30); }
+    &.color4 { background: rgb(246, 191, 38); }
+    &.color5 { background: rgb(51, 182, 121); }
+    &.color6 { background: rgb(11, 128, 67); }
+    &.color7 { background: rgb(3, 155, 229); }
+    &.color8 { background: rgb(63, 81, 181); }
+    &.color9 { background: rgb(121, 134, 203); }
+    &.color10 { background: rgb(97, 97, 97); }
+}
+
+.c-add--block {
+    position: relative;
+    span {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+
+.selectColor {
+    .colorBox {
+        position: relative;
+        background: #fff;
+        &:nth-child(n-6) {
+            margin-bottom: 5px;
+        }
+        input[type=radio] {
+            width: 71px;
+            height: 71px;
+            opacity: 0;
+            &:checked+label {
+                opacity: 0.3;
+            }
+        }
+        label {
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 0;
+            height: 71px;
+            width: 100%;
+            cursor: pointer;
+            pointer-events: none;
+            border-radius: 3px;
+        }
+        &.one label {
+            background: rgb(213, 0, 0);
+        }
+        &.two label {
+            background: rgb(230, 124, 115);
+        }
+        &.three label {
+            background: rgb(244, 81, 30);
+        }
+        &.four label {
+            background: rgb(246, 191, 38);
+        }
+        &.five label {
+            background: rgb(51, 182, 121);
+        }
+        &.six label {
+            background: rgb(11, 128, 67);
+        }
+        &.seven label {
+            background: rgb(3, 155, 229);
+        }
+        &.eight label {
+            background: rgb(63, 81, 181);
+        }
+        &.nine label {
+            background: rgb(121, 134, 203);
+        }
+        &.ten label {
+            background: rgb(97, 97, 97);
+        }
+    }
+}

@@ -1,0 +1,307 @@
+@charset "UTF-8";
+
+$breakpoint-up: (
+    'sm': 'screen and (min-width: 400px)',
+    'md': 'screen and (min-width: 896px)',
+    'lg': 'screen and (min-width: 1020px)',
+    ) !default;
+
+$breakpoint-down: (
+    'sm': 'screen and (max-width: 399px)',
+    'md': 'screen and (max-width: 897px)',
+    'lg': 'screen and (max-width: 1020px)',
+    ) !default;
+
+@mixin mq_up($breakpoint: md) {
+    @media #{map-get($breakpoint-up, $breakpoint)} {
+        @content;
+    }
+}
+
+@mixin mq_down($breakpoint: md) {
+    @media #{map-get($breakpoint-down, $breakpoint)} {
+        @content;
+    }
+}
+
+$colorYellow: #EAA524;
+$colorRed: #ED4646;
+$colorGreem: #5CC964;
+$colorBlue: #3E89E0;
+$bgMainColor: #F6F5F7;
+
+@include mq_up(md) {
+    body {
+        background: #fff;
+    }
+    html,
+    #calendar {
+        min-height: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .caledar-flex {
+        display:-webkit-box;
+        display:-ms-flexbox;
+        display:flex;
+        /* 横幅いっぱい */
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        /* 横並び */
+        -ms-flex-wrap: nowwrap;
+        flex-wrap: nowwrap;
+        > * {
+            flex-shrink: 0;
+        }
+    }
+}
+
+/* ----------------------------------------------------------------------
+    
+    ヘッダー
+
+---------------------------------------------------------------------- */
+@include mq_up(md) {
+    header {
+        background: #fff;
+        border-bottom: 1px solid #E3E3E3;
+        padding: 15px;
+        a {
+            color: #70768D;
+            font-weight: 700;
+        }
+    }
+}
+
+
+/* ----------------------------------------------------------------------
+
+    ボディ
+
+---------------------------------------------------------------------- */
+
+@include mq_up(md) {
+    /*
+        thead
+    */
+    .calendar--main__thead {
+        border-bottom: 1px solid #E3E3E3;
+        background: #FAFAFA;
+    }
+    .calendar--main__right__inner {
+        overflow: scroll; 
+    }
+    .calendar--main__td__inner {
+        border-right: 1px solid #E3E3E3;
+        &.saturday {
+            color: #0035FF;
+        }
+        &.sunday {
+            color: #FF0000;
+        }
+        .calendar--main__day,
+        .calendar--main__week {
+            width:35px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .calendar--main__day {
+            border-bottom: 1px solid #E3E3E3;
+        }
+    }
+    .calendar--main__year,
+    .calendar--main__month {
+        width: 100%;
+        padding: 5px 10px;
+    }
+    .calendar--main__month {
+        border-bottom: 1px solid #E3E3E3;
+    }
+    .calendar--main__th {
+        height: 45px;
+    }
+    .calendar--main__td__column {
+        height: 37px;
+    }
+
+    /*
+        tbody
+    */
+    .calendar--main__tbody {
+        height: calc(100vh - 161px);
+    }
+
+
+    /*
+        left
+    */
+    .calendar--main__left {
+        position: fixed;
+        width: 240px;
+        .calendar--main__thead {
+            height: 114px;
+        }
+        .calendar--main__tbody {
+            background: #fff;
+            .calendar--main__th {
+                position: relative;
+                padding: 0 10px;
+                line-height: 45px;
+                font-weight: 700;
+                border-bottom: 1px solid #F0F0F0;
+                &:before {
+                    content: "";
+                    transition: .2s all;
+                    display: block;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: url(../../../img/icon-arrow-right-black.png) no-repeat center/contain;
+                }
+                &.open:before {
+                    transform: translateY(-50%) rotate(90deg);
+
+                }
+            }
+            .calendar--main__td__column {
+                padding: 0 10px;
+                line-height: 37px;
+                border-bottom: 1px solid #F0F0F0;
+                &.color1 {
+                    border-left: 10px solid #F1D0F4;
+                }
+                &.color2 {
+                    border-left: 10px solid #D66767;
+                }
+                &.color3 {
+                    border-left: 10px solid #D6B467;
+                }
+                &.color4 {
+                    border-left: 10px solid #F5F3C0;
+                }
+                &.color5 {
+                    border-left: 10px solid #BABABA;
+                }
+                &.color6 {
+                    border-left: 10px solid #D0D3F4;
+                }
+                &.color7 {
+                    border-left: 10px solid #C1DDF5;
+                }
+                &.color8 {
+                    border-left: 10px solid #D0F4F3;
+                }
+                &.color9 {
+                    border-left: 10px solid #ABD667;
+                }
+                &.color10 {
+                    border-left: 10px solid #000000;
+                }
+            }
+        }
+    }
+
+    /*
+        right
+    */
+    .calendar--main__right {
+        padding-left: 240px;
+        border-bottom: 1px solid #E3E3E3;
+        .calendar--main__right__inner {
+            border-left: 1px solid #E3E3E3;
+        }
+        .calendar--main__tbody {
+            .calendar--main__tbody__inner {
+                    border-bottom: 1px solid #E3E3E3;
+                .calendar--main__tr {
+                }
+                
+
+            }
+            .calendar--main__td__column {
+                height: 37px;
+                
+            }
+            .calendar--main__td__column__date {
+                position: relative;
+                height: 100%;
+                width: 36px;
+                border-right: #E3E3E3 1px solid;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-align-items: center;
+                -ms-align-items: center;
+                align-items: center;
+                &.saturday,
+                &.sunday {
+                    background: #FAFAFA;
+                }
+                &.progress-now:before {
+                    content: "";
+                    display: block;
+                    height: 30px;
+                    position: absolute;
+                    top: 50%;
+                    width: 38px;
+                    transform: translateY(-50%);
+                    background: pink;
+                }
+                &.progress-start:after,
+                &.progress-start:before,
+                &.progress-end:before,
+                &.progress-end:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                &.progress-start:before,
+                &.progress-end:before {
+                    width: 18px;
+                    height: 30px;
+                    background: pink;
+                }
+                &.progress-start:before {
+                    right: -1px;
+                    border-radius: 30px 0 0 30px;
+                }
+                &.progress-end:before {
+                    left: -1px;
+                    border-radius: 0 30px 30px 0;
+                }
+                &.progress-start:after,
+                &.progress-end:after {
+                    width: 9px;
+                    height: 9px;
+                    border-radius: 50%;
+                    background: #fff;
+                }
+                &.progress-start:after {
+                    right: 0;
+                }
+                &.progress-end:after {
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+

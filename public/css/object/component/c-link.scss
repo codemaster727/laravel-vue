@@ -1,0 +1,56 @@
+.c-link--icon {
+    display: block;
+    padding-right: 30px;
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+.c-link--detail {
+    position: relative;
+    display: block;
+    @include mq_down(md) {
+        padding-right: 30px;
+    }
+    &:before {
+        display: block;
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url(../../../img/icon-arrow-right-gray.png) no-repeat center/contain;
+        @include mq_down(md) {
+            content: "";
+
+        }
+    }
+}
+.c-link--edit {
+    display: block;
+    padding-right: 30px;
+    position: relative;
+    &:before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 20px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url(../../../img/icon-menu-three.png) no-repeat center/contain;
+    }
+}
+
+.c-link--dust:before {
+    width: 20px;
+    height: 20px;
+    background: url(../../../img/icon-dust-black.png) no-repeat center/contain;
+}

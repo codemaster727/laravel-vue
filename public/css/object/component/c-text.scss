@@ -1,0 +1,43 @@
+.c-sentence {
+	line-height: 1.6;
+}
+
+.c-text--main {
+    font-size: 1.05em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.c-text--main_sp {
+    @include mq_down(md) {
+        font-size: 1.05em;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+}
+.c-text--sub {
+    font-size: .9em;
+    margin-bottom: 5px;
+    color: #BFBFBF;
+}
+.c-text--sub_sp {
+    @include mq_down(md) {
+        font-size: .95em;
+        margin-bottom: 5px;
+        color: #BFBFBF;
+    }
+}
+
+.c-text--mark {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #EAA524;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+.c-text--border {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 3px;
+}

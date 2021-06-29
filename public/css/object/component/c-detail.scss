@@ -1,0 +1,42 @@
+.c-detail--img {
+	width: 70px;
+	@include mq_up(md) {
+		width: 100px;
+	}
+	img {
+		width: 90%;
+	}
+}
+
+.c-detail--text {
+	flex: 1;
+}
+
+
+.c-detail--text__headline {
+	font-weight: 700;
+	margin-bottom: 7px;
+}
+.c-detail--text__other {
+	color: #BFBFBF;
+	font-size: 0.95em;
+	margin: 5px 0;
+	span {
+		display: inline-block;
+	}
+}
+.c-detail--text__input {
+    width: 100%;
+	&:first-child {
+		margin-bottom: 10px;
+	}
+	input, textarea {
+		width: 100%;
+		padding: 13px 10px;
+		background: #F4F4F4;
+	}
+	textarea {
+		height: 150px;
+		resize: none;
+	}
+}
