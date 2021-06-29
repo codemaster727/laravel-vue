@@ -92,7 +92,7 @@ class InvoiceController extends ApiBaseController
             ->orWhere('invoice_number', 'like', "%$request->keyword%")
             ->orWhere('remark', 'like', "%$request->keyword%")
             ->orWhere('memo', 'like', "%$request->keyword%")
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->paginate()))->response();
     }
 

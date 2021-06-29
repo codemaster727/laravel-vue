@@ -112,7 +112,7 @@ class ClientController extends ApiBaseController
         return (new ClientResourceCollection(Client::where('name', 'like', "%$request->keyword%")
             ->orWhere('tel', 'like', "%$request->keyword%")
             ->orWhere('memo', 'like', "%$request->keyword%")
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->paginate()))->response();
         // return $id;
         // return $worker;

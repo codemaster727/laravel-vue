@@ -172,7 +172,7 @@ class WorkerController extends ApiBaseController
         return (new WorkerCollection(Worker::where('name', 'like', "%$request->keyword%")
             ->orWhere('email', 'like', "%$request->keyword%")
             ->orWhere('manager_remark', 'like', "%$request->keyword%")
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->paginate()))->response();
         // return $id;
         // return $worker;
