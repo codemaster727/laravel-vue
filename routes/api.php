@@ -66,6 +66,9 @@ Route::namespace('Api\User')->prefix('user')->group(function () {
         Route::post('changePassword', 'WorkerController@changePassword');
         Route::post('search', 'WorkerController@search');
     });
+    Route::prefix('workers')->group(function() {
+        Route::post('searchNew', 'WorkerController@searchNew');
+    });
     // 営業担当者
     Route::apiResource('charge-users', 'ChargeUserController')->only(['index', 'store', 'show', 'update', 'destroy']);
     // 案件工程
@@ -126,6 +129,9 @@ Route::middleware(['cors'])->group(function () {
         Route::get('/quotations/{id}/export-pdf','Api\User\QuotationController@exportPdf')->name('quotations.export_pdf');
         Route::get('/quotations/{id}/preview-pdf','Api\User\QuotationController@previewPdf')->name('quotations.preview_pdf');
         Route::get('/quotations/{id}/invoice', 'Api\User\QuotationController@createOrUpdateInvoice')->name('quotations.invoice');
+        Route::prefix('quotations')->group(function() {
+            Route::post('search', 'Api\User\QuotationController@search');
+        });
 
         // QuotationItem
         Route::resource('quotation-items', 'Api\User\QuotationItemController')->only(['index', 'show','update','store','destroy']);
@@ -156,6 +162,7 @@ Route::namespace('Api\Client')->group(function () {
     Route::apiResource('/clients', 'ClientController');
     Route::prefix('clients')->group(function () {
         Route::post('/updateMemo/{id}','ClientController@updateMemo')->name('clients.updateMemo');
+        Route::post('/search','ClientController@search')->name('clients.search');
     });
 });
 Route::apiResource('/charge_works', 'Api\ChargeWork\ChargeWorkController');

@@ -191,6 +191,17 @@
             this.loadMembers();
             this.loadDocuments();
         },
+        mounted: function () {
+            // this.workStart = dayjs(this.work.period_start_date).month(5).format();
+			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keyup', (e) => {
+				if (e.key === 'Enter' || e.keyCode === 13) {
+					this.searchKeyword = '';
+					if(!e.target.value) return;
+					this.searchKeyword = e.target.value;
+					this.loadDocuments();
+				}
+			});
+        },
         computed: {},
         methods: {
             changePanel: function(panel) {
@@ -225,7 +236,7 @@
             loadDocuments: function() {
                 let params = {
                     member: this.searchMember,
-                    keyword: '',
+                    keyword: this.searchKeyword,
                 };
                 if (this.panelActive === '1') {
                     axios.post('/api/user/quotations/search', params)

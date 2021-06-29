@@ -80,8 +80,8 @@ class Work extends Model
             $params['keyword'] = '';
         }
         return self::status($params['status'])
-            ->memberId($params['member_id'])
-            ->keyword($params['keyword']);
+            ->memberId($params['member_id']);
+            // ->keyword($params['keyword']);
     }
 
     /**

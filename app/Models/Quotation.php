@@ -36,8 +36,8 @@ class Quotation extends Model
 
     static public function search(array $params)
     {
-        return self::filterByMember($params['member'])
-            ->filterByKeyword($params['keyword']);
+        return self::filterByMember($params['member']);
+            // ->filterByKeyword($params['keyword']);
     }
 
     public function scopeFilterByMember(Builder $builder, $member_id = 0)

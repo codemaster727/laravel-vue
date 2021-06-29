@@ -95,4 +95,26 @@ class ClientController extends ApiBaseController
         $client->save();
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    /**
+     *
+     * ‚¨‹q—l‚ğŒŸõ‚·‚é
+     * @post ("/api/clients/search")
+     *
+     * @param Worker $worker
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     *
+     */
+    public function search(Request $request)
+    {
+        // $worker = Worker::where('worker_code', $id)->first();
+        return (new ClientResourceCollection(Client::where('name', 'like', "%$request->keyword%")
+            ->orWhere('tel', 'like', "%$request->keyword%")
+            ->orWhere('memo', 'like', "%$request->keyword%")
+            ->orderBy('created_at', 'DESC')
+            ->paginate()))->response();
+        // return $id;
+        // return $worker;
+    }
 }
