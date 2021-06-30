@@ -15,6 +15,8 @@
 	objectFitImages();
 </script> --}}
 <script>
+	
+
 
 	var app = new Vue({
 		el: '#app',
@@ -172,6 +174,28 @@
 		},
 		watch: {
 
-		}
+		},
+		mounted() {
+			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel").on('click', (e) => {
+				if (e.offsetX > e.target.offsetLeft) {
+					// click on element
+				}
+				else{
+					// click on ::before element
+					$cookies.set('searchKey',$(e.target).children("input").val());
+					document.location = "/user/search"
+				}
+			});
+			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keypress', (e) => {
+				if (e.key === 'Enter' || e.keyCode === 13) {
+					// click on ::before element
+					$cookies.set('searchKey', $(e.target).val());
+					console.log($(e.target).val());
+					document.location = "/user/search"
+				}
+			});
+		},
 	})
+
+	
 </script>

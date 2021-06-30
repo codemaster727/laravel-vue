@@ -199,6 +199,10 @@
                 totalCount: 0,
 			}
 		},
+        mounted() {
+            this.searchKey = $cookies.get('searchKey');
+            this.doSearch();
+        },
 		created: function() {
 			// 必要に応じて、初期表示時に使用するLaravelのAPIを呼び出すメソッドを定義
             this.loadWorks();
@@ -262,11 +266,15 @@
                     });
             },
             loadWorkers: function() {
-                axios.get('/api/user/workers?keyword=' + this.searchKey)
+                // axios.get('/api/user/workers?keyword=' + this.searchKey)
+                axios.post('/api/user/workers/searchNew',{
+                    keyword: this.searchKey,
+                })
                     .then(result => {
                         let datas = result.data.data;
-                        if (datas) {
+                        if (datas&&datas.length) {
                             this.workerResults.splice(0);
+                            console.log(datas);
                             for (let index = 0; index < datas.length; index ++) {
                                 let data = datas[index];
                                 this.workerResults.push({
@@ -282,7 +290,10 @@
                     });
             },
             loadClients: function() {
-                axios.get('/api/clients?keyword=' + this.searchKey)
+                // axios.get('/api/clients?keyword=' + this.searchKey)
+                axios.post('/api/clients/search',{
+                    keyword: this.searchKey,
+                })
                     .then(result => {
                         let datas = result.data.data;
                         if (datas) {
@@ -358,6 +369,10 @@
                 }
             }
 		},
-		watch: {},
+		watch: {
+            // searchKey: function() {
+            //     this.doSearch();
+            // }
+        },
 	}
 </script>

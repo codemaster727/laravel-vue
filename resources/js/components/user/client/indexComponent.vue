@@ -113,14 +113,14 @@
 		},
         mounted: function () {
             // this.workStart = dayjs(this.work.period_start_date).month(5).format();
-			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keyup', (e) => {
-				if (e.key === 'Enter' || e.keyCode === 13) {
-					// this.searchKeyword = '';
-					// if(!e.target.value) return;
-					this.searchKeyword = e.target.value;
-					this.loadClients_s();
-				}
-			});
+			// $("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel > input").on('keyup', (e) => {
+			// 	if (e.key === 'Enter' || e.keyCode === 13) {
+			// 		// this.searchKeyword = '';
+			// 		// if(!e.target.value) return;
+			// 		this.searchKeyword = e.target.value;
+			// 		this.loadClients_s();
+			// 	}
+			// });
         },
 		computed: {},
 		methods: {
