@@ -176,6 +176,22 @@
 
 		},
 		mounted() {
+			console.log(window.location);
+			const tab = window.location.href.split("/").pop();
+			console.log(tab);
+			switch (tab) {
+				case "work":
+					this.tab_num = 1; break;
+				case "client":
+					this.tab_num = 2; break;
+				case "worker":
+					this.tab_num = 3; break;
+				case "document":
+					this.tab_num = 4; break;
+				default:
+					this.tab_num = 1
+			}
+			console.log(this.tab_num);
 			$("#header-user > div.header-user__top > div > div > div.header-user__top__search.c-search--box.l-inputLabel").on('click', (e) => {
 				if (e.offsetX > e.target.offsetLeft) {
 					// click on element
@@ -183,6 +199,7 @@
 				else{
 					// click on ::before element
 					$cookies.set('searchKey',$(e.target).children("input").val());
+					$cookies.set('tab',this.tab_num);
 					document.location = "/user/search"
 				}
 			});
@@ -190,6 +207,7 @@
 				if (e.key === 'Enter' || e.keyCode === 13) {
 					// click on ::before element
 					$cookies.set('searchKey', $(e.target).val());
+					$cookies.set('tab',this.tab_num);
 					console.log($(e.target).val());
 					document.location = "/user/search"
 				}

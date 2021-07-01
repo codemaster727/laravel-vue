@@ -201,6 +201,8 @@
 		},
         mounted() {
             this.searchKey = $cookies.get('searchKey');
+            console.log($cookies.get('tab'));
+            this.itemTabActive = parseInt($cookies.get('tab'));
             this.doSearch();
         },
 		created: function() {
@@ -373,6 +375,9 @@
             // searchKey: function() {
             //     this.doSearch();
             // }
+        },
+        destroyed() {
+            $cookies.remove('searchKey');
         },
 	}
 </script>
