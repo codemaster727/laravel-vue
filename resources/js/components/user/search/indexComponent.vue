@@ -23,6 +23,17 @@
             </div>
         </div>
 
+        <!-- お客様修正 -->
+        <div class="l-modal" :class="{'open': isClientEdit}">
+            <div class="l-modal__inner l-flex l-center l-v__center" @click.self="toggleClientEdit">
+            <!-- <div class="l-modal__inner l-flex l-center l-v__center" @click.self="toggleClientEdit(client.id)"> -->
+                <div class="l-modal__iosModel">
+                    <div class="l-modak__list"><a :href="`/user/client-edit/${modalClientId}`">編集する</a></div>
+                    <div class="l-modak__list"><a @click="deleteClient">削除する</a></div>
+                </div>
+            </div>
+        </div>
+
         <!-- 現場一覧 -->
         <div class="l-wrap--body l-wrap--body__table l-wrap--body__search" v-if="itemTabActive === 1">
             <div class="l-wrap--button">
@@ -115,7 +126,7 @@
                     <div class="l-wrap--body__table__tbody">
                         <template v-for="(data, index) in clientResults">
                             <div class="l-wrap--body__table__tr">
-                                <a class="c-link--detail" href="">
+                                <a class="c-link--detail" href="" @click.prevent="toggleClientEdit(data.id)">
                                     <div class="l-wrap--body__table__tr__inner">
                                         <div class="l-wrap--body__table__td u-w200_pc u-w100per_sp c-text--main_sp">{{ data.name }}</div>
                                         <div class="l-wrap--body__table__td u-w200_pc u-w100per_sp c-text--sub_sp">{{ data.tel }}</div>
@@ -196,6 +207,8 @@
                 documentType: 1,
                 documentResults: [],
                 totalAmount: 0,
+                isClientEdit: false,
+                modalClientId: '',
                 totalCount: 0,
 			}
 		},
@@ -303,6 +316,7 @@
                             for (let index = 0; index < datas.length; index ++) {
                                 let data = datas[index];
                                 this.clientResults.push({
+                                    id: data.id,
                                     name: data.name,
                                     tel: data.tel,
                                     memo: data.memo,
@@ -369,7 +383,26 @@
                             console.log('err', error);
                         });
                 }
-            }
+            },
+            toggleClientEdit: function(id) {
+                this.isClientEdit = !this.isClientEdit;
+                this.modalClientId = id;
+            },
+            deleteClient: function(id) {
+                this.hasError = false
+                this.hasSuccess = false
+                this.isClientEdit = false
+                axios.delete(`/api/clients/${this.modalClientId}`)
+                    .then(result => {
+                        this.hasSuccess = true
+                        setTimeout(function() {
+                            location.href = '/user/client';
+                        }, 1000);
+                    })
+                    .catch(error => {
+                        this.hasError = true
+                    })
+            },
 		},
 		watch: {
             // searchKey: function() {

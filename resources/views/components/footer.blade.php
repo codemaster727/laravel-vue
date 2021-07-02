@@ -183,9 +183,9 @@
 				case "work":
 					this.tab_num = 1; break;
 				case "client":
-					this.tab_num = 2; break;
-				case "worker":
 					this.tab_num = 3; break;
+				case "worker":
+					this.tab_num = 2; break;
 				case "document":
 					this.tab_num = 4; break;
 				default:

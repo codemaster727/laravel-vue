@@ -109,7 +109,9 @@ class ClientController extends ApiBaseController
     public function search(Request $request)
     {
         // $worker = Worker::where('worker_code', $id)->first();
-        return (new ClientResourceCollection(Client::where('name', 'like', "%$request->keyword%")
+        $user = Auth::user();
+        return (new ClientResourceCollection(Client::where('user_id', $user->id)
+            ->where('name', 'like', "%$request->keyword%")
             ->orWhere('tel', 'like', "%$request->keyword%")
             ->orWhere('memo', 'like', "%$request->keyword%")
             ->orderBy('created_at', 'ASC')
