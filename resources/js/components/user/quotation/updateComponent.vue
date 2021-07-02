@@ -192,8 +192,8 @@
                                 <div class="l-wrap--body__table__tr" v-for="(quotationItem, index) in quotation.quotation_items" v-bind:key="quotationItem.id">
                                     <div class="l-wrap--body__table__tr__inner" v-if="!quotationItem.deleted_at">
                                         <div class="l-wrap--body__table__td u-w30_sp">
-                                            <div class="u-w24_sp">
-                                                <img src="/img/icon-minus.png" @click="deleteItem(index)">
+                                            <div class="u-w24_sp" @click="deleteItem(index)">
+                                                <img src="/img/icon-minus.png">
                                             </div>
                                         </div>
                                         <div class="l-wrap--body__table__tr__inner u-wflex1_sp">
@@ -239,9 +239,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(quotationItem, index) in quotation.quotation_items" :key="index">
-                                    <th class="u-w40 u-border--none" v-if="!quotationItem.deleted_at">
-                                        <span>
-                                            <img src="/img/icon-minus.png" @click="deleteItem(index)">
+                                    <th class="u-w40 u-border--none" v-if="!quotationItem.deleted_at" @click="deleteItem(index)">
+                                        <span>qwe
+                                            <img src="/img/icon-minus.png">
                                         </span>
                                     </th>
                                     <td class="u-w320" v-if="!quotationItem.deleted_at">
@@ -463,6 +463,7 @@
 
             // 品目削除
             deleteItem: function(index) {
+                alert(index)
                 if (this.quotation.quotation_items.length > 1) {
                     this.quotation.quotation_items[index].deleted_at = this.formatDate(new Date());
                 }

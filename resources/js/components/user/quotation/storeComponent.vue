@@ -213,26 +213,28 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(quotationItem, index) in quotation.quotation_items" :key="index">
-                                    <th class="u-w40 u-border--none" v-if="!quotationItem.deleted_at">
+                                    <template v-if="quotationItem.deleted_at==undefined">
+                                    <th class="u-w40 u-border--none">
                                         <span>
                                             <img src="/img/icon-minus.png" @click="deleteItem(index)">
                                         </span>
                                     </th>
-                                    <td class="u-w320" v-if="!quotationItem.deleted_at">
+                                    <td class="u-w320">
                                         <input type="" name="" v-model="quotationItem.name">
                                     </td>
-                                    <td class="u-w120" v-if="!quotationItem.deleted_at">
+                                    <td class="u-w120">
                                         <input type="" name="" v-model="quotationItem.quantity">
                                     </td>
-                                    <td class="u-w100" v-if="!quotationItem.deleted_at">
+                                    <td class="u-w100">
                                         <input type="" name="" v-model="quotationItem.unit">
                                     </td>
-                                    <td class="u-w140" v-if="!quotationItem.deleted_at">
+                                    <td class="u-w140">
                                         <input type="" name="" v-model="quotationItem.price">
                                     </td>
                                     <td class="u-wflex1" v-if="!quotationItem.deleted_at">
                                         <span class="total">{{ quotationItem.quantity * quotationItem.price }}</span>
                                     </td>
+                                    </template>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="u-border--none" style="vertical-align: middle;">
@@ -320,6 +322,7 @@
                 works: [],
                 postal1: '',
                 postal2: '',
+                dataReady: 3
             }
         },
         created: function() {
@@ -354,7 +357,7 @@
             },
             // 合計を自動計算
             itemSum: function() {
-                return this.itemNumber * this.itemPrice
+                return (this.itemNumber * this.itemPrice * 1).toFixed(1)
             },
             preTaxTotal: function() {
                 if (!this.quotation.quotation_items) {
@@ -366,13 +369,13 @@
                     if (!item.deleted_at) total += item.price * item.quantity;
                 });
 
-                return total;
+                return (total*1).toFixed(1);
             },
             tax: function() {
-                return this.preTaxTotal * 0.1;
+                return (this.preTaxTotal * 0.1).toFixed(1);
             },
             total: function() {
-                return this.preTaxTotal + this.tax;
+                return (this.preTaxTotal * 1 + this.tax * 1).toFixed(1);
             },
         },
         methods: {
@@ -382,7 +385,8 @@
                 axios.get('/api/user/members/')
                 .then(response => {
                     this.members = response.data.data;
-                    console.log(this.members);
+                    this.dataReady--;
+                    // console.log(this.members);
                 });
             },
 
@@ -392,7 +396,8 @@
                 axios.get('/api/clients/')
                 .then(response => {
                     this.clients = response.data.data;
-                    console.log(this.clients);
+                    this.dataReady--;
+                    // console.log(this.clients);
                 });
             },
 
@@ -402,7 +407,8 @@
                 axios.get('/api/works/')
                 .then(response => {
                     this.works = response.data.data;
-                    console.log(this.works);
+                    this.dataReady--;
+                    // console.log(this.works);
                 });
             },
 
@@ -437,14 +443,20 @@
 
             // 品目削除
             deleteItem: function(index) {
-                if (this.quotation.quotation_items.length > 1) {
+                console.log(index);
+                console.log(this.quotation.quotation_items[index].deleted_at);
+                if (this.quotation.quotation_items.length > 0) {
                     this.quotation.quotation_items[index].deleted_at = this.formatDate(new Date());
+                    this.quotation.quotation_items = this.quotation.quotation_items.slice();
                 }
+                console.log(this.quotation.quotation_items[index].deleted_at);
+
             },
 
             // 見積書作成
             storeQuotation: function() {
-                axios.post(`/api/user/quotations`, this.quotation)
+                console.log(this.quotation);
+                axios.post(`/api/user/quotations/store`, this.quotation)
                 .then(response => {
                     window.history.back();
                 }).catch(error => {
@@ -506,7 +518,20 @@
 
             postal2: function (val) {
                 this.quotation.bill_postal = this.postal1 + val
-            }
+            },
+            dataReady: function (val) {
+                if(val === 0){
+                    console.log("here", this.works);
+                    this.quotation.work_id = this.works[0].id;
+                    this.quotation.client_id = this.clients[0].id;
+                    this.quotation.member_id = this.members[0].id;
+                    this.quotation.publish_date = Date();
+                    const tomorrow = new Date(Date())
+                    tomorrow.setDate(tomorrow.getDate() + 1)
+                    this.quotation.expiration_date = tomorrow;
+                }
+            },
+
         },
     }
 </script>

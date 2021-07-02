@@ -34,9 +34,11 @@ class QuotationController extends ApiBaseController
     public function store(Request $request)
     {
         // 見積書を作成する。
-        $quotation = Quotation::firstOrCreate(
-            $request->only('work_id', 'name', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email')
+        $request_only = $request->only('work_id', 'name', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo');
+        $quotation = Quotation::firstOrNew(
+            $request_only
         );
+        // var_dump($quotation);exit;
 
         // 見積書項目を作成する。
         foreach ($request->quotation_items as $key => $item) {
@@ -142,7 +144,7 @@ class QuotationController extends ApiBaseController
         $quotation = Quotation::with('quotationItems')->findOrFail($id);
 
         // 請求書を作成・変更する。
-        $invoice = Invoice::firstOrCreate(['quotation_id' => $id],
+        $invoice = Invoice::firstOrNew(['quotation_id' => $id],
             array(
                 'work_id' => $quotation->work_id,
                 'name' => $quotation->name,

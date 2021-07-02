@@ -125,11 +125,12 @@ Route::middleware(['cors'])->group(function () {
         Route::post('diagnosereport-items/{id}/sort','Api\User\DiagnoseReportItemController@sortItem')->name('diagnosereports.sort-item');
 
         // Quotation
-        Route::resource('quotations', 'Api\User\QuotationController')->only(['index', 'show','update','store','destroy']);
+        Route::resource('quotations', 'Api\User\QuotationController')->only(['index', 'show','update', 'destroy']);
         Route::get('/quotations/{id}/export-pdf','Api\User\QuotationController@exportPdf')->name('quotations.export_pdf');
         Route::get('/quotations/{id}/preview-pdf','Api\User\QuotationController@previewPdf')->name('quotations.preview_pdf');
         Route::get('/quotations/{id}/invoice', 'Api\User\QuotationController@createOrUpdateInvoice')->name('quotations.invoice');
         Route::prefix('quotations')->group(function() {
+            Route::post('store', 'Api\User\QuotationController@store');
             Route::post('search', 'Api\User\QuotationController@search');
         });
 
