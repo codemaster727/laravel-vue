@@ -26,7 +26,9 @@
                             </div>
                             <div class="l-owner--body__search__right">
                                 <div class="l-owner--body__search__right__content l-flex">
-                                    <div class="input-box"><input type="text" v-model="freeWord" name="" placeholder="キーワードを入力してください"></div>
+                                    <div class="input-box">
+                                        <input type="text" v-model="freeWord" name="" placeholder="キーワードを入力してください">
+                                    </div>
                                     <div class="submit-box" @click.prevent.stop="fetchUsers"><input type="submit" name="" value="検索"></div>
                                 </div>
                             </div>

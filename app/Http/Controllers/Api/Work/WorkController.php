@@ -187,7 +187,6 @@ class WorkController extends ApiBaseController
     public function search(Request $request)
     {
         // var_dump($request->all());exit;
-        
         return (new WorkResourceCollection(Work::search($request->all())
             ->where('name', 'like', "%$request->keyword%")
             ->orWhere('address', 'like', "%$request->keyword%")

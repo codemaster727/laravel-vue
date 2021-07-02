@@ -32,7 +32,9 @@
                                         <img :src="previewUrl">
                                     </div>
                                     <div class="l-input__upload">
-                                        <span class="u-color--blue"><img src="/img/icon-camera.png">ロゴ画像を選択する</span>
+                                        <span class="u-color--blue">
+                                            <img src="/img/icon-camera.png">ロゴ画像を選択する
+                                        </span>
                                         <input type="file" @change="selectLogo">
                                     </div>
                                 </div>

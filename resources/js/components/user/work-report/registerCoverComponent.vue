@@ -11,7 +11,7 @@
                             <img src="/img/icon-arrow-left-black.png">
                         </a>
                     </div>
-                    <h1 class="l-wrap--header__title">作業報告書の表紙を作成</h1>
+                    <h1 class="l-wrap--header__title u-w100per">作業報告書の表紙を作成</h1>
                 </div>
             </div>
             <div class="l-wrap--body l-wrap--body__input">
@@ -20,7 +20,7 @@
                         <li>
                             <div class="l-input__wrap">
                                 <label>タイトル</label>
-                                <input type="text" placeholder="診断報告書のタイトルを記入してください" v-model="title">
+                                <input type="text" placeholder="作業報告書のタイトルを記入してください" v-model="title">
                             </div>
                         </li>
                         <li>
@@ -31,6 +31,9 @@
                                         <img :src="previewUrl">
                                     </div>
                                     <div class="l-input__upload">
+                                        <span class="u-color--blue">
+                                            <img src="/img/icon-camera.png">ロゴ画像を選択する
+                                        </span>
                                         <input type="file" @change="selectLogo">
                                     </div>
                                 </div>
@@ -44,6 +47,7 @@
                         type="button"
                         value="画像を選択する"
                         :disabled="!btnEnabled"
+                        :class="{'notSubmit':!btnEnabled}"
                         @click="registerCover">
                 </div>
             </div>
