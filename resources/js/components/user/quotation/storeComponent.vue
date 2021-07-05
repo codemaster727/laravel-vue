@@ -357,7 +357,7 @@
             },
             // 合計を自動計算
             itemSum: function() {
-                return (this.itemNumber * this.itemPrice * 1).toFixed(1)
+                return parseFloat(this.itemNumber * this.itemPrice).toFixed(0)
             },
             preTaxTotal: function() {
                 if (!this.quotation.quotation_items) {
@@ -369,13 +369,13 @@
                     if (!item.deleted_at) total += item.price * item.quantity;
                 });
 
-                return (total*1).toFixed(1);
+                return parseFloat(total*1).toFixed(0);
             },
             tax: function() {
-                return (this.preTaxTotal * 0.1).toFixed(1);
+                return parseFloat(this.preTaxTotal * 0.1).toFixed(0);
             },
             total: function() {
-                return (this.preTaxTotal * 1 + this.tax * 1).toFixed(1);
+                return parseFloat(this.preTaxTotal * 1 + this.tax * 1).toFixed(0);
             },
         },
         methods: {
