@@ -73,7 +73,7 @@
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "https://packagist.jp"
+            "url": "http://packagist.jp"
         }
     }
 }

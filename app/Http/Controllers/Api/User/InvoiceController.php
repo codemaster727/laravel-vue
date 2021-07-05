@@ -32,7 +32,7 @@ class InvoiceController extends ApiBaseController
     public function store(InvoiceRequest $request)
     {
         // 請求書を作成する。
-        $invoice = Invoice::firstOrCreate(
+        $invoice = Invoice::firstOrNew(
             $request->only('work_id', 'name', 'invoice_number', 'client_id', 'member_id', 'publish_date', 'limit_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email')
         );
 

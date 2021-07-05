@@ -18,7 +18,7 @@
 	var app = new Vue({
 		el: '#app',
 		components: {
-			'vuejs-datepicker':vuejsDatepicker,
+			// 'vuejs-datepicker':vuejsDatepicker,
 		},
 		data() {
 			return {

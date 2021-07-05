@@ -9,6 +9,12 @@ import store from './store/index'
 
 window.Vue = require('vue');
 
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+Vue.$cookies.config('7d')
+
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -180,4 +186,4 @@ Vue.component('manager-manager-update', require('./components/manager/managerUpd
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+ 

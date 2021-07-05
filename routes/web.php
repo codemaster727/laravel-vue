@@ -97,14 +97,14 @@ Route::middleware('auth:web')->group(function() {
     Route::get('/user/work-report/photo-download', 'Front\User\WorkReportController@photoDownload')->name('user.work_report.photo_download');
 
     // 見積書_登録
-    Route::get('/user/quotation/register', 'Front\User\QuotationController@store')->name('user.quotation.store');
+    Route::get('/user/quotation/register/{id}', 'Front\User\QuotationController@store')->name('user.quotation.store');
     // 見積書_詳細
     Route::get('/user/quotation/detail/{id}', 'Front\User\QuotationController@show')->name('user.quotation.show');
     // 見積書_編集
     Route::get('/user/quotation/edit/{id}', 'Front\User\QuotationController@update')->name('user.quotation.update');
 
     // 請求書_登録
-    Route::get('/user/invoice/register', 'Front\User\InvoiceController@store')->name('user.invoice.store');
+    Route::get('/user/invoice/register/{id}', 'Front\User\InvoiceController@store')->name('user.invoice.store');
     // 請求書_詳細
     Route::get('/user/invoice/detail/{id}', 'Front\User\InvoiceController@show')->name('user.invoice.show');
     // 請求書_編集

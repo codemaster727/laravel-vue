@@ -79,8 +79,8 @@ class Work extends Model
         if (!$params['keyword']) {
             $params['keyword'] = '';
         }
-        return self::status($params['status'])
-            ->memberId($params['member_id']);
+        return self::status($params['status']);
+            // ->memberId($params['member_id']);
             // ->keyword($params['keyword']);
     }
 

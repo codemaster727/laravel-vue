@@ -23,6 +23,17 @@
             </div>
         </div>
 
+        <!-- お客様修正 -->
+        <div class="l-modal" :class="{'open': isClientEdit}">
+            <div class="l-modal__inner l-flex l-center l-v__center" @click.self="toggleClientEdit">
+            <!-- <div class="l-modal__inner l-flex l-center l-v__center" @click.self="toggleClientEdit(client.id)"> -->
+                <div class="l-modal__iosModel">
+                    <div class="l-modak__list"><a :href="`/user/client-edit/${modalClientId}`">編集する</a></div>
+                    <div class="l-modak__list"><a @click="deleteClient">削除する</a></div>
+                </div>
+            </div>
+        </div>
+
         <!-- 現場一覧 -->
         <div class="l-wrap--body l-wrap--body__table l-wrap--body__search" v-if="itemTabActive === 1">
             <div class="l-wrap--button">
@@ -115,7 +126,7 @@
                     <div class="l-wrap--body__table__tbody">
                         <template v-for="(data, index) in clientResults">
                             <div class="l-wrap--body__table__tr">
-                                <a class="c-link--detail" href="">
+                                <a class="c-link--detail" href="" @click.prevent="toggleClientEdit(data.id)">
                                     <div class="l-wrap--body__table__tr__inner">
                                         <div class="l-wrap--body__table__td u-w200_pc u-w100per_sp c-text--main_sp">{{ data.name }}</div>
                                         <div class="l-wrap--body__table__td u-w200_pc u-w100per_sp c-text--sub_sp">{{ data.tel }}</div>
@@ -196,9 +207,17 @@
                 documentType: 1,
                 documentResults: [],
                 totalAmount: 0,
+                isClientEdit: false,
+                modalClientId: '',
                 totalCount: 0,
 			}
 		},
+        mounted() {
+            this.searchKey = $cookies.get('searchKey');
+            console.log($cookies.get('tab'));
+            this.itemTabActive = parseInt($cookies.get('tab'));
+            this.doSearch();
+        },
 		created: function() {
 			// 必要に応じて、初期表示時に使用するLaravelのAPIを呼び出すメソッドを定義
             this.loadWorks();
@@ -262,11 +281,15 @@
                     });
             },
             loadWorkers: function() {
-                axios.get('/api/user/workers?keyword=' + this.searchKey)
+                // axios.get('/api/user/workers?keyword=' + this.searchKey)
+                axios.post('/api/user/workers/searchNew',{
+                    keyword: this.searchKey,
+                })
                     .then(result => {
                         let datas = result.data.data;
-                        if (datas) {
+                        if (datas&&datas.length) {
                             this.workerResults.splice(0);
+                            console.log(datas);
                             for (let index = 0; index < datas.length; index ++) {
                                 let data = datas[index];
                                 this.workerResults.push({
@@ -282,7 +305,10 @@
                     });
             },
             loadClients: function() {
-                axios.get('/api/clients?keyword=' + this.searchKey)
+                // axios.get('/api/clients?keyword=' + this.searchKey)
+                axios.post('/api/clients/search',{
+                    keyword: this.searchKey,
+                })
                     .then(result => {
                         let datas = result.data.data;
                         if (datas) {
@@ -290,6 +316,7 @@
                             for (let index = 0; index < datas.length; index ++) {
                                 let data = datas[index];
                                 this.clientResults.push({
+                                    id: data.id,
                                     name: data.name,
                                     tel: data.tel,
                                     memo: data.memo,
@@ -356,8 +383,34 @@
                             console.log('err', error);
                         });
                 }
-            }
+            },
+            toggleClientEdit: function(id) {
+                this.isClientEdit = !this.isClientEdit;
+                this.modalClientId = id;
+            },
+            deleteClient: function(id) {
+                this.hasError = false
+                this.hasSuccess = false
+                this.isClientEdit = false
+                axios.delete(`/api/clients/${this.modalClientId}`)
+                    .then(result => {
+                        this.hasSuccess = true
+                        setTimeout(function() {
+                            location.href = '/user/client';
+                        }, 1000);
+                    })
+                    .catch(error => {
+                        this.hasError = true
+                    })
+            },
 		},
-		watch: {},
+		watch: {
+            // searchKey: function() {
+            //     this.doSearch();
+            // }
+        },
+        destroyed() {
+            $cookies.remove('searchKey');
+        },
 	}
 </script>

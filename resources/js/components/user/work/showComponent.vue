@@ -440,9 +440,17 @@
                                         </div>
                                     </div>
                                     <div class="l-wrap--body__table__tr__inner u-wflex1">
-                                        <div class="l-wrap--body__table__td u-w240_pc c-text--main"><span v-if="item.name">{{ item.name }}</span></div>
-                                        <div class="l-wrap--body__table__td u-w120_pc c-text--sub">{{ item.work_date}} / {{ item.photographer }}</div>
-                                        <div class="l-wrap--body__table__td u-wflex1_pc c-text--sub">{{ item.remark }}</div>
+                                        <div class="l-wrap--body__table__td u-w240_pc c-text--main">
+                                            <span v-if="item.name">
+                                                {{ item.name }}
+                                            </span>
+                                        </div>
+                                        <div class="l-wrap--body__table__td u-w120_pc c-text--sub">
+                                            {{ item.work_date}} / {{ item.photographer }}
+                                        </div>
+                                        <div class="l-wrap--body__table__td u-wflex1_pc c-text--sub">
+                                            {{ item.remark }}
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -458,10 +466,26 @@
         <div class="l-wrap--body l-wrap--body__link" v-if="panelActive === '4'">
             <div class="l-wrap--body__inner">
                 <ul class="l-wrap--body__link__list">
-                    <li><a href="">「見積書」を作成する</a></li>
-                    <li v-if="work.status>0"><a href="">「請求書」を作成する</a></li>
-                    <li><a :href="`/user/diagnose-report/register-cover/${this.id}`">「診断報告書」を作成する</a></li>
-                    <li v-if="work.status>0"><a href="">「現場報告書」を作成する</a></li>
+                    <li>
+                        <a :href="`/user/quotation/register/${this.id}`">
+                            「見積書」を作成する
+                        </a>
+                    </li>
+                    <li v-if="work.status>0">
+                        <a :href="`/user/invoice/register/${this.id}`">
+                            「請求書」を作成する
+                        </a>
+                    </li>
+                    <li>
+                        <a :href="`/user/diagnose-report/register-cover/${this.id}`">
+                            「診断報告書」を作成する
+                        </a>
+                    </li>
+                    <li v-if="work.status>0">
+                        <a :href="`/user/work-report/register-cover/${this.id}`">
+                            「現場報告書」を作成する
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
