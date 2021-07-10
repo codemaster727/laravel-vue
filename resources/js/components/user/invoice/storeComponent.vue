@@ -213,26 +213,28 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(invoiceItem, index) in invoice.invoice_items" :key="index">
-                                    <th class="u-w40 u-border--none" v-if="!invoiceItem.deleted_at">
+                                    <template v-if="invoiceItem.deleted_at==undefined">
+                                    <th class="u-w40 u-border--none">
                                         <span>
                                             <img src="/img/icon-minus.png" @click="deleteItem(index)">
                                         </span>
                                     </th>
-                                    <td class="u-w320" v-if="!invoiceItem.deleted_at">
+                                    <td class="u-w320">
                                         <input type="" name="" v-model="invoiceItem.name">
                                     </td>
-                                    <td class="u-w120" v-if="!invoiceItem.deleted_at">
+                                    <td class="u-w120">
                                         <input type="" name="" v-model="invoiceItem.quantity">
                                     </td>
-                                    <td class="u-w100" v-if="!invoiceItem.deleted_at">
+                                    <td class="u-w100">
                                         <input type="" name="" v-model="invoiceItem.unit">
                                     </td>
-                                    <td class="u-w140" v-if="!invoiceItem.deleted_at">
+                                    <td class="u-w140">
                                         <input type="" name="" v-model="invoiceItem.price">
                                     </td>
                                     <td class="u-wflex1" v-if="!invoiceItem.deleted_at">
                                         <span class="total">{{ invoiceItem.quantity * invoiceItem.price }}</span>
                                     </td>
+                                    </template>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="u-border--none" style="vertical-align: middle;">
@@ -320,6 +322,7 @@
                 works: [],
                 postal1: '',
                 postal2: '',
+                dataReady: 3
             }
         },
         created: function() {
@@ -345,7 +348,8 @@
                     this.formatDate(this.invoice.publish_date),
                     this.formatDate(this.invoice.limit_date),
                     this.invoice.remark,
-                    this.invoice.status,
+                    this.invoice.memo,
+                    // this.invoice.status,
                     this.invoice.client_id,
                     this.invoice.member_id,
                 ]
@@ -353,7 +357,7 @@
             },
             // 合計を自動計算
             itemSum: function() {
-                return this.itemNumber * this.itemPrice
+                return parseFloat(this.itemNumber * this.itemPrice).toFixed(0)
             },
             preTaxTotal: function() {
                 if (!this.invoice.invoice_items) {
@@ -365,23 +369,29 @@
                     if (!item.deleted_at) total += item.price * item.quantity;
                 });
 
-                return total;
+                return parseFloat(total*1).toFixed(0);
             },
             tax: function() {
-                return this.preTaxTotal * 0.1;
+                return parseFloat(this.preTaxTotal * 0.1).toFixed(0);
             },
             total: function() {
-                return this.preTaxTotal + this.tax;
+                return parseFloat(this.preTaxTotal * 1 + this.tax * 1).toFixed(0);
             },
         },
         methods: {
+
+            setWorkName: function() {
+                const work_name = this.works.filter((work) => work.id === this.invoice.work_id)[0].name;
+                this.invoice.name = work_name;
+            },
             // 担当者リストのローディング
             loadMembers: function() {
                 this.members = [];
                 axios.get('/api/user/members/')
                 .then(response => {
                     this.members = response.data.data;
-                    console.log(this.members);
+                    this.dataReady--;
+                    // console.log(this.members);
                 });
             },
 
@@ -391,7 +401,8 @@
                 axios.get('/api/clients/')
                 .then(response => {
                     this.clients = response.data.data;
-                    console.log(this.clients);
+                    this.dataReady--;
+                    // console.log(this.clients);
                 });
             },
 
@@ -401,7 +412,8 @@
                 axios.get('/api/works/')
                 .then(response => {
                     this.works = response.data.data;
-                    console.log(this.works);
+                    this.dataReady--;
+                    // console.log(this.works);
                 });
             },
 
@@ -443,9 +455,10 @@
 
             // 請求書作成
             storeInvoice: function() {
-                axios.post(`/api/user/invoices`, this.invoice)
+                axios.post(`/api/user/invoices/store`, this.invoice)
                 .then(response => {
-                    window.history.back();
+                    // console.log("here", response.data);
+                    window.location.href = `/user/invoice/detail/${response.data.id}`;
                 }).catch(error => {
                     console.log("Edit: " + error);
                 });
@@ -471,7 +484,7 @@
         },
         watch: {
             invoice: function(v) {
-                this.invoice.total = this.total;
+                this.invoice.total = parseInt(this.total);
                 this.works.forEach(v => {
                     if (v.id == this.invoice.work_id) {
                         this.invoice.name = v.name;
@@ -499,7 +512,7 @@
             },
 
             total: function(v) {
-                this.invoice.total = v;
+                this.invoice.total = parseInt(v);
             },
 
             postal1: function (val) {
@@ -508,7 +521,25 @@
 
             postal2: function (val) {
                 this.invoice.bill_postal = this.postal1 + val
-            }
+            },
+            dataReady: function (val) {
+                if(val === 0){
+                    // console.log("here", this.works);
+                    this.invoice.work_id = this.works[0].id;
+                    this.invoice.client_id = this.clients[0].id;
+                    this.invoice.member_id = this.members[0].id;
+                    this.invoice.publish_date = Date();
+                    this.invoice.total = 0;
+                    const tomorrow = new Date(Date())
+                    tomorrow.setDate(tomorrow.getDate() + 1)
+                    this.invoice.limit_date = tomorrow;
+                    this.invoice.invoice_number = this.invoice.invoice_number?this.invoice.invoice_number:"1";
+                    const work_name = this.works[0].name;
+                    this.invoice.name = work_name;
+                    this.invoice.bill_company_name = "";
+                }
+            },
+
         },
     }
 </script>

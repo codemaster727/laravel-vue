@@ -79,7 +79,7 @@
             <div class="l-wrap--button sp-only">
                 <ul class="l-wrap--button__list" :class="{'button-three': quotation.status==1, 'button-two': quotation.status==0}">
                     <li><a :href="`/api/user/quotations/${id}/export-pdf`">PDFダウンロード</a></li>
-                    <li><a :href="`/api/user/quotations/${id}/preview-pdf`" target="_blank">PDFプレビュー</a></li>
+                    <li><a :href="`/quotations/${id}/preview-pdf`" target="_blank">PDFプレビュー</a></li>
                     <li :class="{'u-mt3': (quotation.status==0) && !quotation.invoice_id}" v-if="!quotation.invoice_id">
                         <a @click="createOrUpdateInvoice">請求書反映</a>
                     </li>
@@ -148,7 +148,9 @@
         <div class="l-wrap--body l-wrap--body__pdf pc-only">
             <div class="l-wrap--body__inner">
                 <div class="l-wrap--body__pdf__panel">
-                    <div class="l-wrap--body__pdf__inner"></div>
+                    <div class="l-wrap--body__pdf__inner">
+                        <embed :src="`/api/user/quotations/${id}/preview-pdf#toolbar=0&navpanes=0&scrollbar=0&scrollbar=0`" width="100%" height="740px" type="application/pdf">
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,6 +169,7 @@
         },
         created: function() {
             this.loadQuotationDetail();
+            // this.getPdf();
         },
         computed: {},
         methods: {
@@ -228,6 +231,15 @@
                 });
             },
 
+            //
+            getPdf: function() {
+                axios.get(`/api/user/quotations/${this.id}/export-pdf`)
+                .then(response => {
+                    console.log(response.data);
+                });
+            },
+
+            //
             getStatus: function(v) {
                 if (v == 0) {
                     return "未受注";

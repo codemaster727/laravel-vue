@@ -55,7 +55,7 @@
                                 <th>件名</th>
                                 <td>
                                     <div class="c-select--triangle">
-                                        <select class="c-input--white" v-model="quotation.work_id">
+                                        <select class="c-input--white" v-model="quotation.work_id" @change="setWorkName">
                                             <option v-for="work in works" v-bind:key="work.id" v-bind:value="work.id">{{ work.name }}</option>
                                         </select>
                                     </div>
@@ -379,6 +379,11 @@
             },
         },
         methods: {
+
+            setWorkName: function() {
+                const work_name = this.works.filter((work) => work.id === this.quotation.work_id)[0].name;
+                this.quotation.name = work_name;
+            },
             // 担当者リストのローディング
             loadMembers: function() {
                 this.members = [];
@@ -458,7 +463,8 @@
                 console.log(this.quotation);
                 axios.post(`/api/user/quotations/store`, this.quotation)
                 .then(response => {
-                    window.history.back();
+                    console.log(response.data);
+                    window.location.href = `/user/quotation/detail/${response.data.id}`;
                 }).catch(error => {
                     console.log("Edit: " + error);
                 });
@@ -484,7 +490,7 @@
         },
         watch: {
             quotation: function(v) {
-                this.quotation.total = this.total;
+                this.quotation.total = parseInt(this.total);
                 this.works.forEach(v => {
                     if (v.work_id == this.quotation.work_id) {
                         this.quotation.name = v.name;
@@ -509,7 +515,7 @@
             },
 
             total: function(v) {
-                this.quotation.total = v;
+                this.quotation.total = parseInt(v);
             },
 
             postal1: function (val) {
@@ -521,14 +527,19 @@
             },
             dataReady: function (val) {
                 if(val === 0){
-                    console.log("here", this.works);
+                    // console.log("here", this.works);
                     this.quotation.work_id = this.works[0].id;
                     this.quotation.client_id = this.clients[0].id;
                     this.quotation.member_id = this.members[0].id;
                     this.quotation.publish_date = Date();
+                    this.quotation.total = 0;
                     const tomorrow = new Date(Date())
                     tomorrow.setDate(tomorrow.getDate() + 1)
                     this.quotation.expiration_date = tomorrow;
+                    this.quotation.number = this.quotation.number?this.quotation.number:"1";
+                    const work_name = this.works[0].name;
+                    this.quotation.name = work_name;
+                    this.quotation.bill_company_name = "";
                 }
             },
 

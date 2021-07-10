@@ -117,7 +117,9 @@
         <div class="l-wrap--body l-wrap--body__pdf pc-only">
             <div class="l-wrap--body__inner">
                 <div class="l-wrap--body__pdf__panel">
-                    <div class="l-wrap--body__pdf__inner"></div>
+                    <div class="l-wrap--body__pdf__inner">
+                        <embed :src="`/api/user/invoices/${id}/preview-pdf#toolbar=0&navpanes=0&scrollbar=0&scrollbar=0`" width="100%" height="740px" type="application/pdf">
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,7 +128,6 @@
 
 <script>
     export default {
-        props: ['id'],
         data() {
             return {
                 isModalTrash: false, // 削除モーダル
@@ -134,6 +135,7 @@
                 invoice: {},
             }
         },
+        props: ['id'],
         created: function() {
             this.loadInvoiceDetail();
         },
@@ -151,9 +153,11 @@
             // 請求書詳細のローディング
             loadInvoiceDetail: function() {
                 this.invoice = {client: [], member: []};
+                console.log("here", this.id);
                 axios.get(`/api/user/invoices/${this.id}`)
                 .then(
                     (response) => {
+                        console.log(response.data);
                         this.invoice = response.data.data;
                         console.log(this.invoice);
                     }

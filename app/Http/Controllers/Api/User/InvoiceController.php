@@ -9,6 +9,7 @@ use App\Http\Resources\User\InvoiceCollection;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade;
 use PDF;
 
 class InvoiceController extends ApiBaseController
@@ -29,13 +30,16 @@ class InvoiceController extends ApiBaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InvoiceRequest $request)
+    public function store(Request $request)
     {
         // 請求書を作成する。
-        $invoice = Invoice::firstOrNew(
+        // echo "123";
+        // echo $request;
+        // return $request->only('work_id', 'name', 'invoice_number', 'client_id', 'member_id', 'publish_date', 'limit_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email');
+        $invoice = Invoice::firstOrCreate(
             $request->only('work_id', 'name', 'invoice_number', 'client_id', 'member_id', 'publish_date', 'limit_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email')
         );
-
+        // return $invoice;
         // 請求書項目を作成する。
         foreach ($request->invoice_items as $key => $item) {
             $item['invoice_id'] = $invoice->id;
@@ -44,7 +48,7 @@ class InvoiceController extends ApiBaseController
             InvoiceItem::create($item);
         }
 
-        return response()->noContent();
+        return response()->json(['id' => $invoice->id]);
     }
 
     /**
@@ -55,6 +59,7 @@ class InvoiceController extends ApiBaseController
      */
     public function show($id)
     {
+        // return Invoice::findOrFail($id);
         return new InvoiceResource(Invoice::findOrFail($id));
     }
 
@@ -105,11 +110,10 @@ class InvoiceController extends ApiBaseController
     public function exportPdf($id)
     {
         $invoice = Invoice::findOrFail($id);
-
+        $image = base64_encode(file_get_contents(public_path('public/background.jpg')));
         view()->share('invoice', $invoice);
-
-        $pdf = PDF::loadView('user.invoice.exportPDF');
-        return $pdf->download('請求書.pdf');
+        $pdf = FACADE::loadView('user.invoice.exportPDF', ['image' => $image])->setOptions(['defaultFont' => 'ipag'])->setOptions(['isRemoteEnabled' => true]);
+        return $pdf->download('見積書.pdf');
     }
 
     /**
@@ -121,10 +125,9 @@ class InvoiceController extends ApiBaseController
     public function previewPdf($id)
     {
         $invoice = Invoice::findOrFail($id);
-
+        $image = base64_encode(file_get_contents(public_path('public/background.jpg')));
         view()->share('invoice', $invoice);
-
-        $pdf = PDF::loadView('user.invoice.exportPDF');
-        return $pdf->inline('請求書.pdf');
+        $pdf = FACADE::loadView('user.invoice.exportPDF', ['image' => $image])->setOptions(['defaultFont' => 'ipag'])->setOptions(['isRemoteEnabled' => true]);
+        return $pdf->stream('請求書.pdf');
     }
 }

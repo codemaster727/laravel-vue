@@ -116,7 +116,7 @@
                 workStart: '', // 現場開始時間
 			}
         },
-		props: ["mykeyword"],
+		// props: [],
 		created: function() {
             this.loadMembers();
             this.loadWorks();
