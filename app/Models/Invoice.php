@@ -12,17 +12,17 @@ class Invoice extends Model
 
     protected $guarded = [];
 
-    protected $with = ['work', 'client', 'member', 'quotation', 'invoiceItems'];
+    protected $with = ['work', 'client', 'member', 'invoiceItems'];//'quotation'
 
     public function work()
     {
         return $this->belongsTo(Work::class, 'work_id');
     }
 
-    public function quotation()
-    {
-        return $this->hasOne(Quotation::class);
-    }
+    // public function quotation()
+    // {
+    //     return $this->hasOne(Quotation::class);
+    // }
 
     public function client()
     {

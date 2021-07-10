@@ -110,10 +110,14 @@ Route::middleware(['cors'])->group(function () {
         Route::post('/members/updateMemo/{id}','Api\User\MemberController@updateMemo')->name('members.updateMemo');
 
         // Invoice
-        Route::resource('invoices', 'Api\User\InvoiceController')->only(['index', 'show','update','store','destroy']);
+        Route::resource('invoices', 'Api\User\InvoiceController')->only(['index', 'show','update','destroy']);
         Route::get('/invoices/{id}/export-pdf','Api\User\InvoiceController@exportPdf')->name('invoices.export_pdf');
         Route::get('/invoices/{id}/preview-pdf','Api\User\InvoiceController@previewPdf')->name('invoices.preview_pdf');
-        Route::post('invoices/search', 'Api\User\InvoiceController@search');
+        Route::prefix('invoices')->group(function() {
+            Route::post('store', 'Api\User\InvoiceController@store');
+            Route::post('search', 'Api\User\InvoiceController@search');
+        });
+        // Route::post('invoices/search', 'Api\User\InvoiceController@search');
         // InvoiceItem
         Route::resource('invoice-items', 'Api\User\InvoiceItemController')->only(['index', 'show','update','store','destroy']);
 

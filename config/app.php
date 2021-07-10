@@ -182,11 +182,10 @@ return [
          * isMobile
          */
         Jenssegers\Agent\AgentServiceProvider::class, //追加
-
+        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Laravel Snappy (PDF module)
          */
-        // Barryvdh\Snappy\ServiceProvider::class,
     ],
 
     /*
@@ -245,8 +244,7 @@ return [
         /*
          * Laravel Snappy (PDF module)
          */
-        // 'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-	    // 'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'Facade1' => Barryvdh\DomPDF\Facade::class,
     ]
 
 

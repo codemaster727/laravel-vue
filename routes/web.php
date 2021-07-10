@@ -303,3 +303,8 @@ Route::middleware('auth:admin')->group(function() {
 Route::get('/client/daily-report/{id}', 'Front\Client\ClientController@dailyReport')->name('client.dailyReport');
 
 Route::get('/client/show', 'Front\Client\ClientController@show');
+// Route::middleware(['cors'])->group(function () {
+// Route::get('/quotations/{id}/export-pdf','Api\User\QuotationController@exportPdf');
+Route::get('/invoices/{id}/preview-pdf','Api\User\InvoiceController@previewPdf');
+// Route::get('/quotations/{id}/preview-pdf1','Api\User\QuotationController@previewPdf1');
+// });

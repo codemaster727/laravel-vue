@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Quotation;
 use App\Models\QuotationItem;
 use App\Models\Invoice;
-use PDF;
+use Barryvdh\DomPDF\Facade;
+// use Facade;
 
 
 class QuotationController extends ApiBaseController
@@ -34,11 +35,10 @@ class QuotationController extends ApiBaseController
     public function store(Request $request)
     {
         // 見積書を作成する。
-        $request_only = $request->only('work_id', 'name', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo');
-        $quotation = Quotation::firstOrNew(
-            $request_only
+        // $request->only('work_id', 'name', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo');
+        $quotation = Quotation::firstOrCreate(
+            $request->only('work_id', 'name', 'status', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email')
         );
-        // var_dump($quotation);exit;
 
         // 見積書項目を作成する。
         foreach ($request->quotation_items as $key => $item) {
@@ -48,7 +48,7 @@ class QuotationController extends ApiBaseController
             QuotationItem::create($item);
         }
 
-        return response()->noContent();
+        return response()->json(['id' => $quotation->id]);
     }
 
     /**
@@ -108,10 +108,9 @@ class QuotationController extends ApiBaseController
     public function exportPdf($id)
     {
         $quotation = Quotation::findOrFail($id);
-
+        $image = base64_encode(file_get_contents(public_path('public/background.jpg')));
         view()->share('quotation', $quotation);
-
-        $pdf = PDF::loadView('user.quotation.exportPDF');
+        $pdf = FACADE::loadView('user.quotation.exportPDF', ['image' => $image])->setOptions(['defaultFont' => 'ipag'])->setOptions(['isRemoteEnabled' => true]);
         return $pdf->download('見積書.pdf');
     }
 
@@ -124,11 +123,12 @@ class QuotationController extends ApiBaseController
     public function previewPdf($id)
     {
         $quotation = Quotation::findOrFail($id);
-
+        $image = base64_encode(file_get_contents(public_path('public/background.jpg')));
+        // return view('user.quotation.exportPDF', compact('quotation'));
         view()->share('quotation', $quotation);
-
-        $pdf = PDF::loadView('user.quotation.exportPDF');
-        return $pdf->inline('見積書.pdf');
+        $pdf = FACADE::loadView('user.quotation.exportPDF', ['image' => $image])->setOptions(['defaultFont' => 'ipag'])->setOptions(['isRemoteEnabled' => true]);
+        return $pdf->stream('見積書.pdf');
+        // return $pdf->stream("dompdf_out.pdf", array("Attachment" => false));
     }
 
     /**
