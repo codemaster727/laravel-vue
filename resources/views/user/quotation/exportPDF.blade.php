@@ -116,6 +116,13 @@
     </style>
 </head>
 <body>
+    <?php 
+        $sum = 0;
+        foreach($quotation->quotationItems as $key=>$value){
+            if(isset($value->total))
+            $sum += $value->total;
+        }
+    ?>
     <div class="container">
     <div class="text-right mb-2"><?php echo date("Y/m/d");?></div>
     <div class="text-right">見積番号: {{ $quotation->number }}</div>
@@ -141,7 +148,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h4>お見積金額 ¥{{$quotation->total}}</h4>
+                        <h4>お見積金額 ¥{{$sum*1.1}}</h4>
                         <hr class="hr-custom">
                     </td>
                 </tr>
@@ -170,15 +177,7 @@
                     <tr>
                         <td colspan="2" style="border-left: hidden; border-bottom-color: white"></td>
                         <td colspan="2"><b>小計</b></td>
-                        <td><?php 
-                            $sum = 0;
-                            foreach($quotation->quotationItems as $key=>$value){
-                                if(isset($value->total))
-                                $sum += $value->total;
-                            }
-                            echo $sum;
-                            ?>
-                        </td>
+                        <td>{{$sum}}</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
@@ -198,7 +197,7 @@
             <h4>合　計: {{ $quotation->total }}</h4>
             <h4>備　考: <?php echo nl2br($quotation->remark) ?></h4>
             <h4>社内メモ: <?php echo nl2br($quotation->memo) ?></h4> --}}
-            <?php echo nl2br($invoice->remark) ?>
+            <?php echo nl2br($quotation->remark) ?>
         </div>
         <div id="watermark">
             {{-- <img src="data:image/png;base64,{{ $image }}"/> --}}
