@@ -113,7 +113,7 @@ class InvoiceController extends ApiBaseController
         $image = base64_encode(file_get_contents(public_path('public/background.jpg')));
         view()->share('invoice', $invoice);
         $pdf = FACADE::loadView('user.invoice.exportPDF', ['image' => $image])->setOptions(['defaultFont' => 'ipag'])->setOptions(['isRemoteEnabled' => true]);
-        return $pdf->download('見積書.pdf');
+        return $pdf->download('請求書.pdf');
     }
 
     /**

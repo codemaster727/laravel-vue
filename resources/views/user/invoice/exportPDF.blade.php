@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>見積書</title>
+	<title>請求書</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -116,10 +116,17 @@
     </style>
 </head>
 <body>
+    <?php 
+        $sum = 0;
+        foreach($invoice->invoiceItems as $key=>$value){
+            if(isset($value->total))
+            $sum += $value->total;
+        }
+    ?>
     <div class="container">
     <div class="text-right mb-2"><?php echo date("Y/m/d");?></div>
     <div class="text-right">請求番号: {{ $invoice->invoice_number }}</div>
-    <h1 class="text-center" style="padding: 1rem;">見積書</h1>
+    <h1 class="text-center" style="padding: 1rem;">請求書</h1>
         <div class="page">
             <table class="pretable">
                 <tr>
@@ -136,12 +143,12 @@
                 </tr>
                 <tr>
                     <td>
-                        下記のとおりお見積申し上げます。
+                        下記のとおりお請求申し上げます。
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <h4>お見積金額 ¥{{$invoice->total}}</h4>
+                        <h4>お請求金額 ¥{{$sum*1.1}}</h4>
                         <hr class="hr-custom">
                     </td>
                 </tr>
@@ -170,15 +177,7 @@
                     <tr>
                         <td colspan="2" style="border-left: hidden; border-bottom-color: white"></td>
                         <td colspan="2"><b>小計</b></td>
-                        <td><?php 
-                            $sum = 0;
-                            foreach($invoice->invoiceItems as $key=>$value){
-                                if(isset($value->total))
-                                $sum += $value->total;
-                            }
-                            echo $sum;
-                            ?>
-                        </td>
+                        <td>{{$sum}}</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
@@ -202,7 +201,7 @@
         </div>
         <div id="watermark">
             {{-- <img src="data:image/png;base64,{{ $image }}"/> --}}
-            - 見積書作成サービス
+            - 請求書作成サービス
         </div>
         {{-- {{$invoice}} --}}
     </div>
