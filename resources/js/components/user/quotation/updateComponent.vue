@@ -240,7 +240,7 @@
                             <tbody>
                                 <tr v-for="(quotationItem, index) in quotation.quotation_items" :key="index">
                                     <th class="u-w40 u-border--none" v-if="!quotationItem.deleted_at" @click="deleteItem(index)">
-                                        <span>qwe
+                                        <span>
                                             <img src="/img/icon-minus.png">
                                         </span>
                                     </th>

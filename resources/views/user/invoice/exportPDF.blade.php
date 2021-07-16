@@ -199,10 +199,10 @@
             <h4>社内メモ: <?php echo nl2br($invoice->memo) ?></h4> --}}
             <?php echo nl2br($invoice->remark) ?>
         </div>
-        <div id="watermark">
+        {{-- <div id="watermark"> --}}
             {{-- <img src="data:image/png;base64,{{ $image }}"/> --}}
-            - 請求書作成サービス
-        </div>
+            {{-- - 請求書作成サービス --}}
+        {{-- </div> --}}
         {{-- {{$invoice}} --}}
     </div>
     {{-- <script src="{{ asset('js/app.js') }}" type="text/js"></script> --}}
