@@ -110,7 +110,7 @@
         .hr-custom{
             margin-top: -1rem;
             margin-bottom: 2rem;
-            width: 70%;
+            width: 77%;
             margin-left: 0;
         }
     </style>
@@ -148,7 +148,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h4>お見積金額 ¥{{$sum*1.1}}</h4>
+                        <h4>お見積金額 ¥{{number_format($sum*1.1)}}</h4>
                         <hr class="hr-custom">
                     </td>
                 </tr>
@@ -165,10 +165,10 @@
                     @foreach ($quotation->quotationItems as $key => $value)
                     <tr class="text-right p-1">
                         <td class="text-left" style="width: 50%;">{{ $value->name }}</td>
-                        <td>{{ $value->quantity }}</td>
-                        <td>{{ $value->unit }}</td>
-                        <td>{{ $value->price }}</td>
-                        <td>{{ $value->total }}</td>
+                        <td>{{ number_format($value->quantity) }}</td>
+                        <td>{{ number_format($value->unit) }}</td>
+                        <td>{{ number_format($value->price) }}</td>
+                        <td>{{ number_format($value->total) }}</td>
                     </tr>
                     @endforeach
                     @for ($i = 0; $i < 9 - count($quotation->quotationItems); $i++)
@@ -177,17 +177,17 @@
                     <tr>
                         <td colspan="2" style="border-left: hidden; border-bottom-color: white"></td>
                         <td colspan="2"><b>小計</b></td>
-                        <td>{{$sum}}</td>
+                        <td>{{number_format($sum)}}</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
                         <td colspan="2"><b>消費税 (10%)</b></td>
-                        <td><?php echo $sum/10;?></td>
+                        <td>¥<?php echo number_format($sum/10);?></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
                         <td colspan="2"><b>合計</b></td>
-                        <td>{{$sum*1.1}}</td>
+                        <td>¥{{number_format($sum*1.1)}}</td>
                     </tr>
                 </tbody>
             </table>

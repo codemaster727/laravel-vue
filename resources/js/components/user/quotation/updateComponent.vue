@@ -376,22 +376,26 @@
             },
             // 合計を自動計算
             itemSum: function() {
-                return this.itemNumber * this.itemPrice
+                return parseFloat(this.itemNumber * this.itemPrice).toFixed(0)
             },
             preTaxTotal: function() {
+                if (!this.quotation.quotation_items) {
+                    return 0;
+                }
                 let total = 0;
+
                 this.quotation.quotation_items.forEach(item=> {
                     if (!item.deleted_at) total += item.price * item.quantity;
                 });
 
-                return total;
+                return parseFloat(total*1).toFixed(0);
             },
             tax: function() {
-                return this.preTaxTotal * 0.1;
+                return parseFloat(this.preTaxTotal * 0.1).toFixed(0);
             },
             total: function() {
-                return this.preTaxTotal + this.tax;
-            }
+                return parseFloat(this.preTaxTotal * 1 + this.tax * 1).toFixed(0);
+            },
         },
         methods: {
             // 詳細情報
@@ -496,6 +500,7 @@
                                 axios.delete(`/api/user/quotation-items/${item.id}`)
                                 .then(response => {
                                     console.log(response);
+                                    window.location.href = `/user/quotation/detail/${this.id}`
                                 }).catch(error => {
                                     console.log("Delete: " + error);
                                 });
@@ -510,7 +515,9 @@
                                     total: item.price * item.quantity,
                                     sort_order: i,
                                 }).then(response => {
+                                    console.log("response");
                                     console.log(response);
+                                    window.location.href = `/user/quotation/detail/${this.id}`
                                 }).catch(error => {
                                     console.log("Edit: " + error);
                                 });
@@ -527,6 +534,7 @@
                                     total: item.price * item.quantity,
                                     sort_order: i,
                                 }).then(response => {
+                                    window.location.href = `/user/quotation/detail/${this.id}`
                                     console.log(response);
                                 }).catch(error => {
                                     console.log("Insert: " + error);
@@ -534,8 +542,7 @@
                             }
                         }
                     });
-
-                    window.history.back();
+                    // window.history.back();
                 }).catch(error => {
                     console.log("Edit: " + error);
                 });
@@ -557,7 +564,8 @@
                     day = '0' + day;
 
                 return [year, month, day].join('-');
-            }
+            },
+
         },
         watch: {
             quotation: function(v) {
