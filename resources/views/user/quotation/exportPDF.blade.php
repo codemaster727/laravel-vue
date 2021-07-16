@@ -199,10 +199,10 @@
             <h4>社内メモ: <?php echo nl2br($quotation->memo) ?></h4> --}}
             <?php echo nl2br($quotation->remark) ?>
         </div>
-        <div id="watermark">
+        {{-- <div id="watermark"> --}}
             {{-- <img src="data:image/png;base64,{{ $image }}"/> --}}
-            - 見積書作成サービス
-        </div>
+            {{-- - 見積書作成サービス --}}
+        {{-- </div> --}}
         {{-- {{$quotation}} --}}
     </div>
     {{-- <script src="{{ asset('js/app.js') }}" type="text/js"></script> --}}
