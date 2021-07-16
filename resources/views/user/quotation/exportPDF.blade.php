@@ -182,12 +182,12 @@
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
                         <td colspan="2"><b>消費税 (10%)</b></td>
-                        <td><?php echo number_format($sum/10);?></td>
+                        <td>¥<?php echo number_format($sum/10);?></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
                         <td colspan="2"><b>合計</b></td>
-                        <td>{{number_format($sum*1.1)}}</td>
+                        <td>¥{{number_format($sum*1.1)}}</td>
                     </tr>
                 </tbody>
             </table>
