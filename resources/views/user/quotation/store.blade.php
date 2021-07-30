@@ -6,7 +6,7 @@
         @include("../components/header-user")
         <main>
             <div class="l-wrap l-wrap--table">
-                <user-quotation-store-component></user-quotation-store-component>
+                <user-quotation-store-component :id="{{$id}}"></user-quotation-store-component>
             </div>
         </main>
     </div>

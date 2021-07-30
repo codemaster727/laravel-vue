@@ -6,7 +6,7 @@
         @include("../components/header-user")
         <main>
             <div class="l-wrap l-wrap--table">
-                <user-invoice-store-component></user-invoice-store-component>
+                <user-invoice-store-component id={{$id}}></user-invoice-store-component>
             </div>
         </main>
     </div>

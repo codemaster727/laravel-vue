@@ -30,7 +30,7 @@
                     <ul class="l-wrap--header__inner__list pc-only">
                         <li><a :href="`/api/user/invoices/${this.id}/export-pdf`">PDFダウンロード</a></li>
                         <li><a :href="`/api/user/invoices/${this.id}/preview-pdf`" target="_blank">PDFプレビュー</a></li>
-                        <li><a :href="`/api/user/invoices/${invoice.quotation_id}/preview-pdf`" target="_blank">見積書をみる</a></li>
+                        <li><a :href="`/user/quotation/detail/${invoice.quotation_id}`">見積書をみる</a></li>
                         <li><a :href="`/user/invoice/edit/${this.id}`">編集する</a></li>
                         <li class="icon"><a @click.prevent="toggleModalTrush"><img src="/img/icon-dust-navygray.png"></a></li>
                     </ul>

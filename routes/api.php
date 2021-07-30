@@ -116,6 +116,7 @@ Route::middleware(['cors'])->group(function () {
         Route::prefix('invoices')->group(function() {
             Route::post('store', 'Api\User\InvoiceController@store');
             Route::post('search', 'Api\User\InvoiceController@search');
+            Route::post('existInvoice', 'Api\User\InvoiceController@existInvoice');
         });
         // Route::post('invoices/search', 'Api\User\InvoiceController@search');
         // InvoiceItem
@@ -136,6 +137,7 @@ Route::middleware(['cors'])->group(function () {
         Route::prefix('quotations')->group(function() {
             Route::post('store', 'Api\User\QuotationController@store');
             Route::post('search', 'Api\User\QuotationController@search');
+            Route::post('existQuotation', 'Api\User\QuotationController@existQuotation');
         });
 
         // QuotationItem

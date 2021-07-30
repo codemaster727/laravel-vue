@@ -59,13 +59,13 @@
             width: 50%;
         }
         .text-center{
-            text-align: center
+            text-align: center;
         }
         .text-left{
-            text-align: left
+            text-align: left;
         }
         .text-right{
-            text-align: right
+            text-align: right;
         }
         .table-bordered tr, .table-bordered th, .table-bordered td{
             border: solid 1px black;
@@ -166,7 +166,7 @@
                     <tr class="text-right p-1">
                         <td class="text-left" style="width: 50%;">{{ $value->name }}</td>
                         <td>{{ number_format($value->quantity) }}</td>
-                        <td>{{ number_format($value->unit) }}</td>
+                        <td>{{ $value->unit }}</td>
                         <td>{{ number_format($value->price) }}</td>
                         <td>{{ number_format($value->total) }}</td>
                     </tr>
@@ -177,17 +177,17 @@
                     <tr>
                         <td colspan="2" style="border-left: hidden; border-bottom-color: white"></td>
                         <td colspan="2"><b>小計</b></td>
-                        <td>{{number_format($sum)}}</td>
+                        <td class="text-right">¥{{number_format($sum)}}</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
                         <td colspan="2"><b>消費税 (10%)</b></td>
-                        <td>¥<?php echo number_format($sum/10);?></td>
+                        <td class="text-right">¥<?php echo number_format($sum/10);?></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-left-color: white; border-bottom-color: white"></td>
                         <td colspan="2"><b>合計</b></td>
-                        <td>¥{{number_format($sum*1.1)}}</td>
+                        <td class="text-right">¥{{number_format($sum*1.1)}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -205,7 +205,6 @@
         {{-- </div> --}}
         {{-- {{$quotation}} --}}
     </div>
-    {{-- <script src="{{ asset('js/app.js') }}" type="text/js"></script> --}}
 {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 </body>
 </html>

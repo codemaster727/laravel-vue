@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class QuotationController extends Controller
 {
     // 見積もり書_登録
-    public function store() {
-        return view('user.quotation.store');
+    public function store($id) {
+        return view('user.quotation.store', array('id' => $id));
     }
     // 見積もり書_詳細
     public function show($id) {
