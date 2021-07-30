@@ -290,8 +290,8 @@
                 </div>
                 <div class="l-trackingFooter__box">
                     <div class="l-button--submit">
-                        <input type="submit" name="" value="見積書を作成" class="c-button--yellowRounded"
-                            :disabled="!proccess_all" :class="{'notSubmit':!proccess_all}" @click="storeInvoice">
+                        <input type="submit" name="" value="請求書を作成" class="c-button--yellowRounded"
+                            :disabled="!(proccess_all&&invoice_items_count)" :class="{'notSubmit':!(proccess_all&&invoice_items_count)}" @click="storeInvoice">
                     </div>
                 </div>
             </div>
@@ -322,14 +322,18 @@
                 works: [],
                 postal1: '',
                 postal2: '',
-                dataReady: 3
+                dataReady: 3,
+                invoice_items_count: 0
             }
         },
+        props: ["id"],
         created: function() {
             this.invoice = {invoice_items: []};
             this.loadMembers();
             this.loadClients();
             this.loadWorks();
+            if(this.id>0)
+                this.loadQuotation();
         },
         computed: {
             form_all: function() {
@@ -353,7 +357,8 @@
                     this.invoice.client_id,
                     this.invoice.member_id,
                 ]
-                return (required_fields.indexOf('') === -1) && this.invoice.invoice_items && (this.invoice.invoice_items.length > 0)
+                console.log(required_fields.indexOf(''));
+                return (required_fields.indexOf('') === -1)
             },
             // 合計を自動計算
             itemSum: function() {
@@ -417,6 +422,23 @@
                 });
             },
 
+            // ワークリストのローディング
+            loadQuotation: function() {
+                this.quotation = [];
+                axios.get(`/api/user/quotations/${this.id}/invoice`)
+                .then(response => {
+                    this.invoice = response.data;
+                    this.invoice.invoice_items = response.data.quotation_items;
+                    this.invoice.invoice_number = response.data.number
+                    this.invoice.limit_date = response.data.expiration_date
+                    delete this.invoice.quotation_items
+                    delete this.invoice.expiration_date
+                    delete this.invoice.number
+                    this.invoice_items_count = this.invoice.invoice_items.filter(value=>!value.deleted_at).length
+                    console.log(this.invoice);
+                });
+            },
+
             // 詳細情報
             toggleInvoiceActive: function() {
                 this.isInvoiceActive = !this.isInvoiceActive
@@ -444,20 +466,23 @@
                 this.itemPrice = 0;
                 this.itemNumber = 0;
                 this.itemUnit = '';
+                this.invoice_items_count = this.invoice.invoice_items.length
             },
 
             // 品目削除
             deleteItem: function(index) {
-                if (this.invoice.invoice_items.length > 1) {
+                if (this.invoice.invoice_items.length > 0) {
                     this.invoice.invoice_items[index].deleted_at = this.formatDate(new Date());
+                    this.invoice.invoice_items = this.invoice.invoice_items.slice();
                 }
+                this.invoice_items_count = this.invoice.invoice_items.filter(value=>!value.deleted_at).length
             },
 
             // 請求書作成
             storeInvoice: function() {
                 axios.post(`/api/user/invoices/store`, this.invoice)
                 .then(response => {
-                    // console.log("here", response.data);
+                    console.log("here", response.data);
                     window.location.href = `/user/invoice/detail/${response.data.id}`;
                 }).catch(error => {
                     console.log("Edit: " + error);

@@ -50,9 +50,9 @@
                         <!-- case：確定していない場合 -->
                         <li v-if="quotation.status==0"><a @click="toggleModalConfirm()">確定する</a></li>
                         <!-- case1：請求書が作成されていない場合 -->
-                        <li v-if="!quotation.invoice_id"><a @click="createOrUpdateInvoice">同じ内容で請求書を作成</a></li>
+                        <li><a @click="createOrUpdateInvoice">同じ内容で請求書を作成</a></li>
                         <!-- case2：請求書が作成されている場合 -->
-                        <li v-if="quotation.invoice_id"><a href="">請求書をみる</a></li>
+                        <li v-if="quotation.status>0&&invoice.id>0"><a :class="invoice.id>0?'':'disabled'" :href="`/user/invoice/detail/${invoice.id}`">請求書をみる</a></li>
                         <li><a :href="`/user/quotation/edit/${id}`">編集する</a></li>
                         <li class="icon"><a @click.prevent="toggleModalTrush"><img src="/img/icon-dust-navygray.png"></a></li>
                     </ul>
@@ -80,10 +80,10 @@
                 <ul class="l-wrap--button__list" :class="{'button-three': quotation.status==1, 'button-two': quotation.status==0}">
                     <li><a :href="`/api/user/quotations/${id}/export-pdf`">PDFダウンロード</a></li>
                     <li><a :href="`/quotations/${id}/preview-pdf`" target="_blank">PDFプレビュー</a></li>
-                    <li :class="{'u-mt3': (quotation.status==0) && !quotation.invoice_id}" v-if="!quotation.invoice_id">
+                    <li :class="{'u-mt3': (quotation.status==0) && !invoice.id}" v-if="!invoice.id">
                         <a @click="createOrUpdateInvoice">請求書反映</a>
                     </li>
-                    <li :class="{'u-mt3': (quotation.status==0) && !quotation.invoice_id}" v-if="quotation.status==0">
+                    <li :class="{'u-mt3': (quotation.status==0) && !invoice.id}" v-if="quotation.status==0">
                         <a @click="toggleModalConfirm">確定する</a>
                     </li>
                 </ul>
@@ -159,14 +159,15 @@
 
 <script>
     export default {
-        props: ['id'],
         data() {
             return {
                 isModalTrash: false, // 削除モーダル
                 isModalConfirm: false, // 確定モーダル
                 quotation: {},
+                invoice: {},
             }
         },
+        props: ['id'],
         created: function() {
             this.loadQuotationDetail();
             // this.getPdf();
@@ -182,6 +183,23 @@
                 this.isModalConfirm = !this.isModalConfirm
             },
 
+
+            loadInvoice: function() {
+                console.log(this.quotation);
+                axios
+                    .post('/api/user/invoices/existInvoice', {
+                        work_id: this.quotation.work_id,
+                    })
+                    .then(res => {
+                        console.log("here", res.data);
+                        this.invoice = res.data[0]??{};
+
+                    })
+                    .catch(err => {
+                        console.log("SendSMS: " + err);
+                    })
+            },
+
             // 見積書詳細のローディング
             loadQuotationDetail: function() {
                 this.quotation = {};
@@ -194,10 +212,15 @@
                             this.postal2 = this.quotation.bill_postal.substring(4);
                         }
 
-                        console.log(this.quotation);
+                        if(this.quotation.status > 0){
+                            console.log("object");
+                            this.loadInvoice();
+                        }
                     }
                 );
             },
+
+            
 
             // 見積書を削除する
             deleteQuotation: function() {
@@ -223,12 +246,13 @@
 
             // 請求書を作成する
             createOrUpdateInvoice: function() {
-                axios.get(`/api/user/quotations/${this.id}/invoice`, this.quotation)
-                .then(response => {
-                    console.log(response);
-                    this.quotation.status = 1;
-                    this.isModalConfirm = false;
-                });
+                // axios.get(`/api/user/quotations/${this.id}/invoice`, this.quotation)
+                // .then(response => {
+                //     console.log(response);
+                //     this.quotation.status = 1;
+                    window.location.href = `/user/invoice/register/${this.id}`;
+                    // this.isModalConfirm = false;
+                // });
             },
 
             //
@@ -251,3 +275,11 @@
         watch: {},
     }
 </script>
+
+<style lang="css">
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.5;
+    }
+</style>

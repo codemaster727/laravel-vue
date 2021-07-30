@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class InvoiceController extends Controller
 {
     // 請求書_登録
-    public function store() {
-        return view('user.invoice.store');
+    public function store($id) {
+        return view('user.invoice.store', ['id' => $id]);
     }
     // 請求書_詳細
     public function show($id) {

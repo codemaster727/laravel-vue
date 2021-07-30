@@ -467,22 +467,34 @@
             <div class="l-wrap--body__inner">
                 <ul class="l-wrap--body__link__list">
                     <li>
-                        <a :href="`/user/quotation/register/${this.id}`">
+                        <a v-if="this.quotaion.length>0" :href="`/user/quotation/detail/${this.quotaion[0].id}`">
+                            「見積書」を確認する
+                        </a>
+                        <a v-else :href="`/user/quotation/register/${this.id}`">
                             「見積書」を作成する
                         </a>
                     </li>
                     <li v-if="work.status>0">
-                        <a :href="`/user/invoice/register/${this.id}`">
+                        <a v-if="this.invoice.length>0" :href="`/user/invoice/detail/${this.invoice[0].id}`">
+                            「請求書」を確認する
+                        </a>
+                        <a v-else :href="`/user/invoice/register/0`">
                             「請求書」を作成する
                         </a>
                     </li>
                     <li>
-                        <a :href="`/user/diagnose-report/register-cover/${this.id}`">
+                        <a v-if="this.diagnoseRoport.length>0" :href="`/user/diagnose-report/register-cover/${this.diagnoseRoport[0].id}`">
+                            「診断報告書」を確認する
+                        </a>
+                        <a v-else :href="`/user/diagnose-report/register-cover/${this.id}`">
                             「診断報告書」を作成する
                         </a>
                     </li>
                     <li v-if="work.status>0">
-                        <a :href="`/user/work-report/register-cover/${this.id}`">
+                        <a v-if="this.workReport.length>0" :href="`/user/work-report/register-cover/${this.workReport[0].id}`">
+                            「現場報告書」を確認する
+                        </a>
+                        <a v-else :href="`/user/work-report/register/${this.id}`">
                             「現場報告書」を作成する
                         </a>
                     </li>
@@ -520,6 +532,10 @@
                 hasSuccess: false,
                 completeSuccess: false,
                 copmleteError: false,
+                quotaion: [],
+                invoice: [],
+                diagnoseRoport: [],
+                workReport: [],
 			}
 		},
 		created: function() {
@@ -576,6 +592,10 @@
                             return x.work_dateSort;
                         });
                         this.work.history = _.groupBy(this.work.history, 'work_date')
+                        this.loadQuotation();
+                        this.loadInvoice();
+                        // this.loadQuotation();
+                        // this.loadQuotation();
                     })
                     .catch(response => {
                         alert('取得時にエラーが発生しました。')
@@ -694,6 +714,38 @@
                     })
                     .then(res => {
                         console.log(res);
+                    })
+                    .catch(err => {
+                        console.log("SendSMS: " + err);
+                    })
+            },
+
+            loadQuotation: function() {
+                console.log("here",this.work.client_id);
+                axios
+                    .post('/api/user/quotations/existQuotation', {
+                        client_id: this.work.client_id,
+                        // member_id: 1,
+                        work_id: this.work.id,
+                    })
+                    .then(res => {
+                        console.log("here", res);
+                        this.quotaion = res.data
+                    })
+                    .catch(err => {
+                        console.log("SendSMS: " + err);
+                    })
+            },
+
+            loadInvoice: function() {
+                console.log("here",this.work.client_id);
+                axios
+                    .post('/api/user/invoices/existInvoice', {
+                        work_id: this.work.id,
+                    })
+                    .then(res => {
+                        console.log("here", res);
+                        this.invoice = res.data
                     })
                     .catch(err => {
                         console.log("SendSMS: " + err);

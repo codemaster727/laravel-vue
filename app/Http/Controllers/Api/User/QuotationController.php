@@ -36,9 +36,17 @@ class QuotationController extends ApiBaseController
     {
         // 見積書を作成する。
         // $request->only('work_id', 'name', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo');
-        $quotation = Quotation::firstOrCreate(
-            $request->only('work_id', 'name', 'status', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email')
-        );
+        $quotation = Quotation::where('work_id', $request->get('work_id'))->first();
+
+        if ($quotation === null) {
+            $quotation = new Quotation($request->only('work_id', 'name', 'status', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email'));
+        }
+        $quotation->save();
+        // $quotation = Quotation::firstOrCreate(
+            // $request->only('work_id', 'name', 'status', 'number', 'client_id', 'member_id', 'publish_date', 'expiration_date', 'total', 'remark', 'memo', 'bill_company_name', 'bill_postal', 'bill_address', 'bill_tel', 'bill_email')
+            // "work_id", $request->get('work_id')
+        // );
+        // var_dump($quotation);exit;
 
         // 見積書項目を作成する。
         foreach ($request->quotation_items as $key => $item) {
@@ -60,6 +68,18 @@ class QuotationController extends ApiBaseController
     public function show($id)
     {
         return new QuotationResource(Quotation::findOrFail($id));
+    }
+
+    /**
+     * Display the specified resource by work and user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function existQuotation(Request $request)
+    {
+        // echo $request->get("client_id");exit;
+        return Quotation::where('work_id', $request->get("work_id"))->get();
     }
 
     /**
@@ -111,7 +131,7 @@ class QuotationController extends ApiBaseController
         $image = base64_encode(file_get_contents(public_path('public/background.jpg')));
         view()->share('quotation', $quotation);
         $pdf = FACADE::loadView('user.quotation.exportPDF', ['image' => $image])->setOptions(['defaultFont' => 'ipag'])->setOptions(['isRemoteEnabled' => true]);
-        return $pdf->download('見積書.pdf');
+        return $pdf->download($quotation->publish_date.'-'.$quotation->number.'.pdf');
     }
 
     /**
@@ -158,26 +178,26 @@ class QuotationController extends ApiBaseController
                 'memo' => $quotation->memo,
             )
         );
-        $quotation->invoice_id = $invoice->id;
+        // $quotation->invoice_id = $invoice->id;
 
         // 請求書項目を作成・変更する。
         $invoice->invoiceItems()->delete();
-        foreach ($quotation->quotationItems() as $item) {
-            $item['invoice_id'] = $invoice->id;
-            $item['limit_date'] = $item['expiration_date'];
-            unset($item['quotation_id']);
-            unset($item['created_at']);
-            unset($item['updated_at']);
-            unset($item['deleted_at']);
-            unset($item['id']);
-            unset($item['expiration_date']);
-            $invoice->invoiceItems()->insert($item);
-        }
+        // foreach ($quotation->quotationItems() as $item) {
+        //     $item['invoice_id'] = $invoice->id;
+        //     $item['limit_date'] = $item['expiration_date'];
+        //     unset($item['quotation_id']);
+        //     unset($item['created_at']);
+        //     unset($item['updated_at']);
+        //     unset($item['deleted_at']);
+        //     unset($item['id']);
+        //     unset($item['expiration_date']);
+        //     $invoice->invoiceItems()->insert($item);
+        // }
 
         // 見積書を確定する。
-        $quotation->status = 1;
-        $quotation->save();
+        // $quotation->status = 1;
+        // $quotation->save();
 
-        return response()->noContent();
+        return response()->json($quotation);
     }
 }

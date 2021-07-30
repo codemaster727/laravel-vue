@@ -55,7 +55,7 @@
                                 <th>件名</th>
                                 <td>
                                     <div class="c-select--triangle">
-                                        <select class="c-input--white" v-model="quotation.work_id" @change="setWorkName">
+                                        <select class="c-input--white" v-model="quotation.work_id">
                                             <option v-for="work in works" v-bind:key="work.id" v-bind:value="work.id">{{ work.name }}</option>
                                         </select>
                                     </div>
@@ -291,7 +291,7 @@
                 <div class="l-trackingFooter__box">
                     <div class="l-button--submit">
                         <input type="submit" name="" value="見積書を作成" class="c-button--yellowRounded"
-                            :disabled="!proccess_all" :class="{'notSubmit':!proccess_all}" @click="storeQuotation">
+                            :disabled="!(proccess_all&&quotation_items_count)" :class="{'notSubmit':!(proccess_all&&quotation_items_count)}" @click="storeQuotation">
                     </div>
                 </div>
             </div>
@@ -322,9 +322,11 @@
                 works: [],
                 postal1: '',
                 postal2: '',
-                dataReady: 3
+                dataReady: 3,
+                quotation_items_count: 0
             }
         },
+        props: ["id"],
         created: function() {
             this.quotation = {quotation_items: []};
             this.loadMembers();
@@ -444,6 +446,7 @@
                 this.itemPrice = 0;
                 this.itemNumber = 0;
                 this.itemUnit = '';
+                this.quotation_items_count = this.quotation.quotation_items.length
             },
 
             // 品目削除
@@ -455,6 +458,7 @@
                     this.quotation.quotation_items = this.quotation.quotation_items.slice();
                 }
                 console.log(this.quotation.quotation_items[index].deleted_at);
+                this.quotation_items_count = this.quotation.quotation_items.filter(value=>!value.deleted_at).length
 
             },
 
@@ -528,7 +532,7 @@
             dataReady: function (val) {
                 if(val === 0){
                     // console.log("here", this.works);
-                    this.quotation.work_id = this.works[0].id;
+                    this.quotation.work_id = this.id;
                     this.quotation.client_id = this.clients[0].id;
                     this.quotation.member_id = this.members[0].id;
                     this.quotation.publish_date = Date();

@@ -5,7 +5,6 @@
 				<div class="c-search--box left">
 					<input class="c-input--gray" type="" name="" placeholder="テキストを入力してください。" v-model="searchKeyword">
 				</div>
-				asdasd
 			</div>
 		</div>
 		<div class="l-wrap--header">

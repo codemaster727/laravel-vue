@@ -9,7 +9,7 @@
         @include("../components/header-user")
         <main>
             <div class="l-wrap l-wrap--table">
-            <user-quotation-show-component v-bind:id="{{ $id }}"></user-quotation-show-component>
+            <user-quotation-show-component :id="{{$id}}"></user-quotation-show-component>
             </div>
         </main>
     </div>

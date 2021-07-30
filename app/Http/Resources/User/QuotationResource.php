@@ -17,6 +17,7 @@ class QuotationResource extends JsonResource
         return [
             'id' => $this->id,
             'work' => $this->work->name,
+            'work_id' => $this->work_id,
             'status' => $this->status,
             'name' => $this->name,
             'number' => $this->number,
